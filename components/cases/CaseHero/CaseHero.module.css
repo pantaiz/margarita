@@ -1,0 +1,147 @@
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 64px;
+  width: 100%;
+  padding-bottom: 16px;
+}
+
+.top {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 64px;
+  width: 100%;
+}
+
+.introBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  align-self: flex-start;
+  padding: 13px 16px 11px 12px;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+  color: var(--color-blue-brand);
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.backLink:hover {
+  background: var(--button-fill-hover);
+  transform: translateY(-1px);
+}
+
+.titleBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  text-align: center;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 52px;
+  color: var(--color-blue-brand);
+}
+
+.meta {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 804px;
+}
+
+.metaItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex: 0 0 186px;
+  width: 186px;
+}
+
+.metaLabel {
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 24px;
+  color: var(--color-blue-brand);
+  opacity: 0.75;
+}
+
+.metaValue {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+  color: var(--color-blue-brand);
+}
+
+.cta {
+  align-self: center;
+}
+
+.coverWrap {
+  width: 100%;
+  aspect-ratio: 1080 / 640;
+  border-radius: 40px;
+  overflow: hidden;
+  animation: heroReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.coverImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+@keyframes heroReveal {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    gap: 40px;
+  }
+
+  .top {
+    gap: 40px;
+  }
+
+  .title {
+    font-size: 32px;
+    line-height: 1.15;
+  }
+
+  .meta {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+  }
+}

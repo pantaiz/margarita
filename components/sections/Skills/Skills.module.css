@@ -1,0 +1,190 @@
+.skills {
+  position: relative;
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 0 80px;
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-size: 24px;
+  line-height: 1.3;
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+
+.body {
+  position: relative;
+  min-height: 258px;
+}
+
+.groups {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.group {
+  flex: 1;
+  min-width: 0;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-content: flex-start;
+  justify-content: flex-start;
+}
+
+.captions {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.captionUx,
+.captionUi,
+.captionPm {
+  position: absolute;
+}
+
+.captionArrowImg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Figma Desktop 1440 — node 65:1583 Caption-UX */
+.captionUxArrow {
+  position: absolute;
+  left: 200px;
+  top: 174px;
+  width: 52px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.captionUxArrow .captionArrowImg {
+  width: 43px;
+  height: 29px;
+  transform: rotate(-140.66deg);
+}
+
+.captionUxText {
+  position: absolute;
+  left: 252px;
+  top: 199px;
+  font-family: var(--font-hand);
+  font-size: 28px;
+  line-height: 32px;
+  color: var(--color-blue-brand);
+  transform: rotate(5.52deg);
+  white-space: nowrap;
+}
+
+/* Figma — node 65:1582 Caption-UI */
+.captionUiArrow {
+  position: absolute;
+  left: 481px;
+  top: 231px;
+  width: 52px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.captionUiArrow .captionArrowImg {
+  width: 44px;
+  height: 29px;
+  transform: rotate(-138.4deg);
+}
+
+.captionUiText {
+  position: absolute;
+  left: 536px;
+  top: 255px;
+  font-family: var(--font-hand);
+  font-size: 28px;
+  line-height: 32px;
+  letter-spacing: 3.36px;
+  color: var(--color-pink-text);
+  transform: rotate(5.52deg);
+  white-space: nowrap;
+}
+
+/* Figma — node 65:1584 Caption-PM */
+.captionPmArrow {
+  position: absolute;
+  left: 769px;
+  top: 130px;
+  width: 50px;
+  height: 53px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.captionPmArrow .captionArrowImg {
+  width: 45px;
+  height: 29px;
+  transform: rotate(-126.32deg);
+}
+
+.captionPmText {
+  position: absolute;
+  left: 769px;
+  top: 182px;
+  width: 140px;
+  font-family: var(--font-hand);
+  font-size: 24px;
+  line-height: 28px;
+  color: var(--color-green-brand);
+}
+
+@media (max-width: 768px) {
+  .skills {
+    max-width: none;
+  }
+
+  .body {
+    min-height: auto;
+    padding-bottom: 0;
+  }
+
+  .groups {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .captions {
+    position: static;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 24px;
+  }
+
+  .captionUx,
+  .captionUi,
+  .captionPm {
+    position: static;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .captionUxArrow,
+  .captionUiArrow,
+  .captionPmArrow,
+  .captionUxText,
+  .captionUiText,
+  .captionPmText {
+    position: static;
+    transform: none;
+  }
+}

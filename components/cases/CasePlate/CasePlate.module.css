@@ -1,0 +1,37 @@
+.plate {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 8px;
+  padding: 28px 24px;
+  border: 1px solid rgba(57, 105, 249, 0.16);
+  border-radius: 24px;
+  background: #fff;
+}
+
+.label {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--color-blue-brand);
+  padding-bottom: 4px;
+  border-bottom: 2px solid rgba(57, 105, 249, 0.12);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .plate {
+    padding: 24px 20px;
+    gap: 20px;
+  }
+
+  .label {
+    font-size: 22px;
+  }
+}

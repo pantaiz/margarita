@@ -1,0 +1,52 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  background: transparent;
+  isolation: isolate;
+}
+
+.device {
+  position: relative;
+  width: 100%;
+  /* Full phone (bezel overlay asset), screen sized separately as 393×852 */
+  aspect-ratio: 1170 / 2384;
+  flex: none;
+  cursor: pointer;
+}
+
+.device:focus-visible {
+  outline: 2.5px solid var(--color-blue-brand, #3969f9);
+  outline-offset: 4px;
+  border-radius: 12%;
+}
+
+.screen {
+  position: absolute;
+  /* Horizontal inset matches opaque side bezels on phone-bezel-overlay.png */
+  left: 5.1709%;
+  width: calc(100% - 10.3419%);
+  /* Top optical inset; height comes from 393×852 so AR cannot drift */
+  top: 2.2651%;
+  aspect-ratio: 393 / 852;
+  height: auto;
+  /* Videos are encoded to 393:852 — cover = no stretch */
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 14% / 6.5%;
+  background: #111;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.bezel {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+}

@@ -1,0 +1,67 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --color-blue-brand: #3969f9;
+  --color-yellow-brand: #ffda33;
+  --color-yellow-text: #e7bd00;
+  --color-green-brand: #69b578;
+  --color-pink-brand: #ffb5e7;
+  --color-pink-text: #d791c1;
+  --color-red: #f94b4b;
+  --color-bg-100: #f4f4f3;
+  --color-bg-50: rgba(250, 250, 250, 0.6);
+  --font-display: var(--font-benzin), 'Montserrat', sans-serif;
+  --font-body: var(--font-gilroy), 'Manrope', sans-serif;
+  --font-hand: var(--font-zeequada), 'Caveat', cursive;
+  --container-max: 1200px;
+  --page-padding: 120px;
+  --button-fill: var(--color-bg-100);
+  --button-fill-hover: #ffffff;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  font-family: var(--font-body);
+  color: var(--color-blue-brand);
+  background: var(--color-bg-100);
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.interactive {
+  position: relative;
+  z-index: 4;
+  pointer-events: auto;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --page-padding: 24px;
+  }
+}

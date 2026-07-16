@@ -1,0 +1,133 @@
+.figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 36px;
+  border: 1px solid #d7d7d7;
+  background: #fff;
+}
+
+.table {
+  width: max-content;
+  min-width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  color: #494848;
+}
+
+.th,
+.td {
+  padding: 24px 20px;
+  border-bottom: 1px solid #d7d7d7;
+  border-right: 1px solid #d7d7d7;
+  text-align: left;
+  vertical-align: top;
+  min-width: 200px;
+  max-width: 308px;
+}
+
+.th:last-child,
+.td:last-child {
+  border-right: none;
+}
+
+tbody tr:last-child .td {
+  border-bottom: none;
+}
+
+.th {
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--color-blue-brand);
+  background: #fff;
+}
+
+.labelBold {
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--color-blue-brand);
+}
+
+.headerWithLogo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.markerCell {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.markerHit {
+  display: inline-block;
+  font-size: 24px;
+  line-height: 1;
+  font-weight: 700;
+  color: var(--color-blue-brand);
+}
+
+.markerMiss {
+  display: inline-block;
+  font-size: 22px;
+  line-height: 1;
+  font-weight: 500;
+  color: rgba(57, 105, 249, 0.45);
+}
+
+.markerLegend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  color: #494848;
+  opacity: 0.85;
+  padding-left: 4px;
+}
+
+.markerLegendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.caption {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  color: #494848;
+  opacity: 0.85;
+  padding-left: 4px;
+}
+
+@media (max-width: 768px) {
+  .th,
+  .td {
+    padding: 16px 14px;
+    font-size: 14px;
+    min-width: 160px;
+  }
+
+  .logo {
+    width: 32px;
+    height: 32px;
+  }
+}

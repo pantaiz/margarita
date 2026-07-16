@@ -1,0 +1,5 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Icon Button">
+<path id="Icon" d="M40 14.875L25.1648 24.1814C24.6614 24.4693 24.0896 24.621 23.5074 24.621C22.9252 24.621 22.3534 24.4693 21.85 24.1814L7 14.875M10.3 10H36.7C38.5225 10 40 11.4551 40 13.25V32.75C40 34.5449 38.5225 36 36.7 36H10.3C8.47746 36 7 34.5449 7 32.75V13.25C7 11.4551 8.47746 10 10.3 10Z" stroke="var(--stroke-0, #FFB5E7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>

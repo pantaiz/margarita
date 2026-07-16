@@ -1,0 +1,63 @@
+.sticker {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.tape {
+  position: absolute;
+  top: -26px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  width: 41px;
+  height: 60px;
+  overflow: hidden;
+}
+
+.tapeImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.note {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(-2deg) skewX(-0.26deg);
+  box-shadow: 0 0 4.5px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+.noteBg,
+.noteTexture {
+  object-fit: cover;
+}
+
+.noteTexture {
+  opacity: 0.08;
+}
+
+.note::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #ffecf9;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.text {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-hand);
+  font-size: 28px;
+  line-height: 1.3;
+  color: var(--color-blue-brand);
+  white-space: nowrap;
+}

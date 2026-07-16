@@ -1,0 +1,230 @@
+.hero {
+  padding: 0 0 80px;
+  text-align: center;
+}
+
+.stage {
+  position: relative;
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  min-height: 720px;
+  padding-top: 177px;
+}
+
+.decor {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Figma Content 1200 coords − 60 (1080 band), tops − 0 relative to stage padding */
+.sun {
+  left: 106px;
+  top: 151px;
+  transform: rotate(-3.68deg);
+}
+
+.cloud1 {
+  left: 28px;
+  top: 244px;
+}
+
+.cloud2 {
+  left: 720px;
+  top: 238px;
+}
+
+.cloud3 {
+  left: 858px;
+  top: 285px;
+}
+
+.star1 {
+  left: 881px;
+  top: 422px;
+}
+
+.star2 {
+  left: 56px;
+  top: 422px;
+}
+
+.star3 {
+  left: 161px;
+  top: 647px;
+}
+
+.flowerRed {
+  left: 945px;
+  top: 617px;
+}
+
+.flowerPink {
+  left: 837px;
+  top: 585px;
+}
+
+.photoWrap {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  margin-bottom: 40px;
+}
+
+.arrow {
+  position: absolute;
+  left: -35px;
+  top: 30px;
+  transform: rotate(30.57deg) scaleY(-1);
+}
+
+.caption {
+  position: absolute;
+  left: -30px;
+  top: 0;
+  font-family: var(--font-hand);
+  font-size: 28px;
+  line-height: 32px;
+  transform: rotate(-17.98deg);
+  white-space: nowrap;
+}
+
+.photo {
+  width: 161px;
+  height: 180px;
+  margin: 0 auto;
+}
+
+.textBlock {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  max-width: 719px;
+  margin: 0 auto;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+
+.introHead {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.greeting {
+  font-family: var(--font-hand);
+  font-size: 34px;
+  line-height: 40px;
+  letter-spacing: 3.4px;
+}
+
+.name {
+  font-family: var(--font-display);
+  font-size: 48px;
+  line-height: 52px;
+  font-weight: 500;
+}
+
+.role {
+  font-family: var(--font-hand);
+  font-size: 40px;
+  line-height: 40px;
+  letter-spacing: 4px;
+  text-align: center;
+}
+
+.roleWord {
+  position: relative;
+  display: inline-block;
+}
+
+.underline {
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  transform: translateX(-50%);
+  width: 474px;
+  max-width: 100%;
+  height: auto;
+}
+
+.socials {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .stage {
+    min-height: auto;
+    padding-top: 100px;
+    overflow: hidden;
+  }
+
+  .sun {
+    width: 90px;
+    left: 10px;
+    top: 100px;
+  }
+
+  .cloud1 {
+    left: 0;
+    top: 180px;
+    opacity: 0.7;
+    transform: scale(0.75);
+  }
+
+  .cloud2,
+  .cloud3 {
+    opacity: 0.7;
+    transform: scale(0.75);
+  }
+
+  .cloud2 {
+    left: auto;
+    right: 80px;
+    top: 160px;
+  }
+
+  .cloud3 {
+    left: auto;
+    right: 20px;
+    top: 200px;
+  }
+
+  .flowerRed,
+  .flowerPink,
+  .star1,
+  .star2,
+  .star3 {
+    display: none;
+  }
+
+  .greeting {
+    font-size: 28px;
+  }
+
+  .name {
+    font-size: 36px;
+    line-height: 1.1;
+  }
+
+  .role {
+    font-size: 28px;
+    letter-spacing: 2px;
+  }
+
+  .underline {
+    width: 280px;
+  }
+}

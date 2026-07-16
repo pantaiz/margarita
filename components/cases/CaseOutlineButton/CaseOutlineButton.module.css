@@ -1,0 +1,36 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 48px;
+  padding: 0 20px;
+  border: 2.5px solid var(--color-blue-brand);
+  border-radius: 999px;
+  background: var(--button-fill);
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--color-blue-brand);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+
+.button:hover {
+  background: var(--button-fill-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(57, 105, 249, 0.12);
+}
+
+.button:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .button {
+    height: 44px;
+    padding: 0 16px;
+    font-size: 15px;
+  }
+}

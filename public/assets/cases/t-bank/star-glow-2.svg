@@ -1,0 +1,19 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 1106.35 670.624" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Star 3" filter="url(#filter0_g_0_127)">
+<path d="M553.175 33.9L601.088 188.488L741.563 54.4284L690.443 208.667L904.508 113.241L761.258 246.3L1020 202.396L803.971 296.303L1072.45 309.85L812.813 351.925L1054.77 421.094L786.589 405.652L969.341 521.101L728.842 450.229L827.71 596.366L647.369 479.636L649.001 636.724L553.175 489.9L457.35 636.724L458.982 479.636L278.641 596.366L377.509 450.229L137.009 521.101L319.762 405.652L51.5833 421.094L293.538 351.925L33.9 309.85L302.379 296.303L86.3477 202.396L345.092 246.3L201.843 113.241L415.908 208.667L364.788 54.4284L505.263 188.488L553.175 33.9Z" fill="url(#paint0_radial_0_127)"/>
+</g>
+<defs>
+<filter id="filter0_g_0_127" x="0" y="0" width="1106.35" height="670.624" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feTurbulence type="fractalNoise" baseFrequency="0.99900001287460327 0.99900001287460327" numOctaves="3" seed="8864" />
+<feDisplacementMap in="shape" scale="67.800003051757812" xChannelSelector="R" yChannelSelector="G" result="displacedImage" width="100%" height="100%" />
+<feMerge result="effect1_texture_0_127">
+<feMergeNode in="displacedImage"/>
+</feMerge>
+</filter>
+<radialGradient id="paint0_radial_0_127" cx="0" cy="0" r="1" gradientTransform="matrix(-0.81484 -321.516 797.54 -1.84493 559.287 311.431)" gradientUnits="userSpaceOnUse">
+<stop offset="0.0835869" stop-color="white"/>
+</radialGradient>
+</defs>
+</svg>

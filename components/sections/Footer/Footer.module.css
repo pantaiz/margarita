@@ -1,0 +1,44 @@
+.footer {
+  padding: 48px 0 80px;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 76px;
+}
+
+.link {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+
+.link:hover {
+  opacity: 0.75;
+}
+
+.blue {
+  color: var(--color-blue-brand);
+}
+
+.yellow {
+  color: var(--color-yellow-text);
+}
+
+.green {
+  color: var(--color-green-brand);
+}
+
+@media (max-width: 768px) {
+  .links {
+    gap: 32px 48px;
+  }
+}

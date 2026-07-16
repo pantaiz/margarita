@@ -1,0 +1,29 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  padding: 16px 24px;
+  transition: transform 0.3s ease;
+  transform: translateY(0);
+}
+
+.headerHidden {
+  transform: translateY(-120%);
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+}
+
+@media (max-width: 768px) {
+  .nav {
+    gap: 12px;
+  }
+}

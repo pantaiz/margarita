@@ -1,0 +1,35 @@
+.chip {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px 8px;
+  border-radius: 999px;
+  border: 2px solid;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.blue {
+  border-color: var(--color-blue-brand);
+  color: var(--color-blue-brand);
+}
+
+.yellow {
+  border-color: var(--color-yellow-brand);
+  color: var(--color-yellow-text);
+}
+
+.green {
+  border-color: var(--color-green-brand);
+  color: var(--color-green-brand);
+}
+
+.pink {
+  border-color: var(--color-pink-brand);
+  color: var(--color-pink-text);
+}
