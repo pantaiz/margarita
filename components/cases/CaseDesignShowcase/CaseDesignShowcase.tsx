@@ -44,6 +44,7 @@ export default function CaseDesignShowcase({ blocks }: CaseDesignShowcaseProps) 
                         src={video.src}
                         alt={video.alt}
                         poster={video.poster}
+                        kind={video.kind}
                       />
                     </div>
                   </div>

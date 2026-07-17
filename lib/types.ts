@@ -72,6 +72,8 @@ export type CaseDesignVideo = {
   alt: string;
   poster?: string;
   caption?: string;
+  /** Static frame inside phone mockup instead of video */
+  kind?: 'video' | 'image';
 };
 
 export type CaseDesignBlock = {

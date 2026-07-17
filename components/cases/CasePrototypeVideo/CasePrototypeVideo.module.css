@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 12px;
   width: 100%;
   background: transparent;
   isolation: isolate;
@@ -10,7 +11,7 @@
 .device {
   position: relative;
   width: 100%;
-  /* Full phone (bezel overlay asset), screen sized separately as 393×852 */
+  /* Full phone (bezel overlay asset 1170×2384) */
   aspect-ratio: 1170 / 2384;
   flex: none;
   cursor: pointer;
@@ -22,21 +23,34 @@
   border-radius: 12%;
 }
 
-.screen {
+.deviceStatic {
+  cursor: default;
+}
+
+/*
+ * Screen hole from phone-bezel-overlay.png opaque chrome.
+ * No border-radius here — corner mask comes from the bezel PNG only,
+ * so full-bleed UI is not double-cropped by CSS + overlay.
+ */
+.screenClip {
   position: absolute;
-  /* Horizontal inset matches opaque side bezels on phone-bezel-overlay.png */
-  left: 5.1709%;
-  width: calc(100% - 10.3419%);
-  /* Top optical inset; height comes from 393×852 so AR cannot drift */
-  top: 2.2651%;
-  aspect-ratio: 393 / 852;
-  height: auto;
-  /* Videos are encoded to 393:852 — cover = no stretch */
-  object-fit: cover;
-  object-position: center top;
-  border-radius: 14% / 6.5%;
+  left: 5.1282%;
+  top: 2.2232%;
+  width: 89.8291%;
+  height: 95.5537%;
+  overflow: hidden;
   background: #111;
   z-index: 0;
+  pointer-events: none;
+}
+
+.screen {
+  display: block;
+  width: 100%;
+  height: 100%;
+  /* Exact fill of the glass hole — no cover-crop shift */
+  object-fit: fill;
+  object-position: center top;
   pointer-events: none;
 }
 
@@ -49,4 +63,23 @@
   pointer-events: none;
   user-select: none;
   z-index: 1;
+}
+
+/* Figma 234:698 — track 120×8, fill brand blue */
+.progress {
+  width: 120px;
+  height: 8px;
+  border-radius: 29px;
+  background: #e5e5e5;
+  overflow: hidden;
+  cursor: pointer;
+  flex: none;
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: 29px;
+  background: var(--color-blue-brand, #3969f9);
+  min-width: 0;
+  pointer-events: none;
 }

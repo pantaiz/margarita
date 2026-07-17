@@ -6,7 +6,7 @@ export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://svitich-mar
 export const CONTACTS = {
   telegram: 'https://t.me/m_svitsich',
   email: 'ri.kakhanovich@gmail.com',
-  linkedin: 'https://www.linkedin.com/in/margarita-svitsich-105b11339',
+  linkedin: 'https://www.linkedin.com/in/маргарита-свитич-105b11339/',
 } as const;
 
 export const NAV_ITEMS: NavItem[] = [

@@ -83,7 +83,7 @@ export const assets = {
     protoWaitingFromHome: `${A}/cases/t-bank/prototype/waiting-from-home.mp4`,
     protoWaitingFromLock: `${A}/cases/t-bank/prototype/waiting-from-lock.mp4`,
     protoVerification: `${A}/cases/t-bank/prototype/verification.mp4`,
-    protoOpenError: `${A}/cases/t-bank/prototype/open-error.mp4`,
+    protoOpenError: `${A}/cases/t-bank/open-error-screen.png`,
     protoReviewPositive: `${A}/cases/t-bank/prototype/review-positive.mp4`,
     protoReviewNegative: `${A}/cases/t-bank/prototype/review-negative.mp4`,
   },

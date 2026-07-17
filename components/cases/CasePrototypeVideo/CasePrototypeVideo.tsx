@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { assets } from '@/lib/assets';
 import styles from './CasePrototypeVideo.module.css';
 
@@ -8,19 +8,24 @@ type CasePrototypeVideoProps = {
   src: string;
   alt: string;
   poster?: string;
+  kind?: 'video' | 'image';
 };
 
 export default function CasePrototypeVideo({
   src,
   alt,
   poster,
+  kind = 'video',
 }: CasePrototypeVideoProps) {
+  const isImage = kind === 'image';
   const rootRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  /** User paused while in view — skip autoplay until they leave and come back */
   const userPausedRef = useRef(false);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
+    if (isImage) return;
+
     const root = rootRef.current;
     const video = videoRef.current;
     if (!root || !video) return;
@@ -58,9 +63,64 @@ export default function CasePrototypeVideo({
     return () => {
       observer.disconnect();
     };
-  }, [src]);
+  }, [src, isImage]);
+
+  useEffect(() => {
+    if (isImage) return;
+    const video = videoRef.current;
+    if (!video) return;
+
+    let rafId = 0;
+
+    const tick = () => {
+      if (video.duration && !Number.isNaN(video.duration)) {
+        setProgress(video.currentTime / video.duration);
+      }
+      rafId = requestAnimationFrame(tick);
+    };
+
+    const start = () => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(tick);
+    };
+
+    const stop = () => {
+      cancelAnimationFrame(rafId);
+      rafId = 0;
+      if (video.duration && !Number.isNaN(video.duration)) {
+        setProgress(video.currentTime / video.duration);
+      }
+    };
+
+    const onPlay = () => start();
+    const onPause = () => stop();
+    const onEnded = () => stop();
+    const onSeeked = () => {
+      if (video.duration && !Number.isNaN(video.duration)) {
+        setProgress(video.currentTime / video.duration);
+      }
+    };
+
+    video.addEventListener('play', onPlay);
+    video.addEventListener('pause', onPause);
+    video.addEventListener('ended', onEnded);
+    video.addEventListener('seeked', onSeeked);
+    video.addEventListener('loadedmetadata', onSeeked);
+
+    if (!video.paused) start();
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      video.removeEventListener('play', onPlay);
+      video.removeEventListener('pause', onPause);
+      video.removeEventListener('ended', onEnded);
+      video.removeEventListener('seeked', onSeeked);
+      video.removeEventListener('loadedmetadata', onSeeked);
+    };
+  }, [src, isImage]);
 
   async function togglePlayback() {
+    if (isImage) return;
     const video = videoRef.current;
     if (!video) return;
 
@@ -77,35 +137,70 @@ export default function CasePrototypeVideo({
     }
   }
 
+  function seekTo(event: React.MouseEvent<HTMLDivElement>) {
+    if (isImage) return;
+    const video = videoRef.current;
+    if (!video || !video.duration) return;
+
+    const rect = event.currentTarget.getBoundingClientRect();
+    const ratio = Math.min(
+      1,
+      Math.max(0, (event.clientX - rect.left) / rect.width),
+    );
+    video.currentTime = ratio * video.duration;
+    setProgress(ratio);
+  }
+
   return (
     <div ref={rootRef} className={styles.wrap}>
       <div
-        className={styles.device}
-        role="button"
-        tabIndex={0}
-        aria-label={`${alt}. Нажмите, чтобы воспроизвести или поставить на паузу`}
-        onClick={togglePlayback}
-        onKeyDown={(event) => {
-          if (event.key === 'Enter' || event.key === ' ') {
-            event.preventDefault();
-            void togglePlayback();
-          }
-        }}
+        className={`${styles.device}${isImage ? ` ${styles.deviceStatic}` : ''}`}
+        role={isImage ? undefined : 'button'}
+        tabIndex={isImage ? undefined : 0}
+        aria-label={
+          isImage
+            ? undefined
+            : `${alt}. Нажмите, чтобы воспроизвести или поставить на паузу`
+        }
+        onClick={isImage ? undefined : () => void togglePlayback()}
+        onKeyDown={
+          isImage
+            ? undefined
+            : (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                  event.preventDefault();
+                  void togglePlayback();
+                }
+              }
+        }
       >
-        <video
-          ref={videoRef}
-          className={styles.screen}
-          src={src}
-          poster={poster}
-          width={393}
-          height={852}
-          playsInline
-          muted
-          loop
-          preload="metadata"
-          aria-hidden
-          controls={false}
-        />
+        <div className={styles.screenClip}>
+          {isImage ? (
+            <img
+              className={styles.screen}
+              src={src}
+              alt={alt}
+              width={393}
+              height={852}
+              draggable={false}
+            />
+          ) : (
+            <video
+              ref={videoRef}
+              className={styles.screen}
+              src={src}
+              poster={poster}
+              width={393}
+              height={852}
+              playsInline
+              muted
+              loop
+              preload="metadata"
+              aria-hidden
+              controls={false}
+            />
+          )}
+        </div>
         <img
           className={styles.bezel}
           src={assets.caseTBank.phoneBezelOverlay}
@@ -114,6 +209,26 @@ export default function CasePrototypeVideo({
           draggable={false}
         />
       </div>
+
+      {!isImage && (
+        <div
+          className={styles.progress}
+          role="progressbar"
+          aria-label="Прогресс воспроизведения"
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuenow={Math.round(progress * 100)}
+          onClick={(event) => {
+            event.stopPropagation();
+            seekTo(event);
+          }}
+        >
+          <div
+            className={styles.progressFill}
+            style={{ width: `${progress * 100}%` }}
+          />
+        </div>
+      )}
     </div>
   );
 }

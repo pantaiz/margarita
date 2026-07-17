@@ -785,7 +785,7 @@ export const T_BANK_ROBOT_DELIVERY: CaseStudyFull = {
       intro: [
         {
           type: 'paragraph',
-          text: 'По итогам юзабилити я доработала интерфейс — ниже итоговое решение. Иллюстрации и иконки рисовала сама.',
+          text: 'По итогам юзабилити я доработала интерфейс — ниже итоговое решение. Все иконки и большую часть иллюстраций отрисовывала сама.',
         },
         {
           type: 'outline-link',
@@ -886,7 +886,8 @@ export const T_BANK_ROBOT_DELIVERY: CaseStudyFull = {
           videos: [
             {
               src: A.protoOpenError,
-              alt: 'Прототип: ошибка при открытии робота',
+              alt: 'Экран ошибки при открытии робота',
+              kind: 'image',
             },
           ],
         },
