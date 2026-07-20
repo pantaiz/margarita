@@ -15,7 +15,7 @@ export default function SiteShell({
   mainPaddingTop,
 }: SiteShellProps) {
   const containerStyle = contentWidth
-    ? { maxWidth: `${contentWidth}px`, padding: 0 }
+    ? { maxWidth: `${contentWidth}px` }
     : undefined;
   const mainStyle = mainPaddingTop
     ? { paddingTop: `${mainPaddingTop}px` }
