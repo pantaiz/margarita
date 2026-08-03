@@ -103,7 +103,9 @@ export default function DrawingPalette({
             aria-label="Ластик"
             aria-pressed={eraser}
           >
-            <AppImage src={assets.eraser} alt="" width={36} height={36} />
+            <span className={styles.toolIcon}>
+              <AppImage src={assets.eraser} alt="" width={32} height={32} />
+            </span>
             {eraser && (
               <AppImage
                 src={assets.paletteCheck}
@@ -124,15 +126,15 @@ export default function DrawingPalette({
               <AppImage
                 src={assets.trashLid}
                 alt=""
-                width={24}
+                width={28}
                 height={6}
                 className={styles.trashLid}
               />
               <AppImage
                 src={assets.trashBody}
                 alt=""
-                width={17}
-                height={22}
+                width={21}
+                height={25}
                 className={styles.trashBody}
               />
             </span>

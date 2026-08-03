@@ -10,6 +10,61 @@ type UseDrawingCanvasOptions = {
   eraser: boolean;
 };
 
+function hexToRgb(hex: string): { r: number; g: number; b: number } {
+  const raw = hex.replace('#', '');
+  const full =
+    raw.length === 3
+      ? raw
+          .split('')
+          .map((c) => c + c)
+          .join('')
+      : raw;
+  const value = Number.parseInt(full, 16);
+  return {
+    r: (value >> 16) & 255,
+    g: (value >> 8) & 255,
+    b: value & 255,
+  };
+}
+
+/** Build a thin colored-pencil grain stamp; flecks stay near palette hex. */
+function createPencilStamp(color: string, size = 16): HTMLCanvasElement {
+  const stamp = document.createElement('canvas');
+  stamp.width = size;
+  stamp.height = size;
+  const ctx = stamp.getContext('2d');
+  if (!ctx) return stamp;
+
+  const { r, g, b } = hexToRgb(color);
+  const imageData = ctx.createImageData(size, size);
+  const data = imageData.data;
+  const center = (size - 1) / 2;
+
+  for (let y = 0; y < size; y++) {
+    for (let x = 0; x < size; x++) {
+      const dx = x - center;
+      const dy = y - center;
+      const dist = Math.hypot(dx, dy) / center;
+      if (dist > 1) continue;
+
+      // Paper tooth: dense bright flecks, softer only at the edge
+      const tooth = Math.random();
+      const falloff = 1 - dist * dist;
+      if (tooth > 0.55 * falloff) continue;
+
+      const alpha = Math.floor((200 + Math.random() * 55) * falloff);
+      const i = (y * size + x) * 4;
+      data[i] = r;
+      data[i + 1] = g;
+      data[i + 2] = b;
+      data[i + 3] = alpha;
+    }
+  }
+
+  ctx.putImageData(imageData, 0, 0);
+  return stamp;
+}
+
 export function useDrawingCanvas({
   containerRef,
   color,
@@ -18,7 +73,17 @@ export function useDrawingCanvas({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const drawingRef = useRef(false);
   const lastPointRef = useRef<Point | null>(null);
+  const stampRef = useRef<HTMLCanvasElement | null>(null);
+  const stampColorRef = useRef<string>('');
   const [height, setHeight] = useState(0);
+
+  const getStamp = useCallback((hex: string) => {
+    if (!stampRef.current || stampColorRef.current !== hex) {
+      stampRef.current = createPencilStamp(hex);
+      stampColorRef.current = hex;
+    }
+    return stampRef.current;
+  }, []);
 
   const resizeCanvas = useCallback(() => {
     const canvas = canvasRef.current;
@@ -95,49 +160,47 @@ export function useDrawingCanvas({
       return;
     }
 
-    // Colored pencil on toothy paper: layered jittered strokes + grain flecks
     const dx = to.x - from.x;
     const dy = to.y - from.y;
     const length = Math.hypot(dx, dy) || 1;
-    const baseWidth = 2.2 + Math.random() * 2.4;
-    const passes = 4;
+    const stamp = getStamp(color);
+    const stampSize = 4 + Math.random() * 2.5;
 
     ctx.globalCompositeOperation = 'source-over';
 
-    for (let i = 0; i < passes; i++) {
-      const offsetX = (Math.random() - 0.5) * 1.8;
-      const offsetY = (Math.random() - 0.5) * 1.8;
+    // Thin grain along the path — colored pencil, palette-bright
+    const step = 0.7 + Math.random() * 0.4;
+    const count = Math.max(1, Math.ceil(length / step));
 
-      ctx.globalAlpha = 0.18 + Math.random() * 0.28;
-      ctx.lineWidth = baseWidth * (0.55 + Math.random() * 0.7);
-      ctx.strokeStyle = color;
-      ctx.beginPath();
-      ctx.moveTo(from.x + offsetX, from.y + offsetY);
-      ctx.lineTo(to.x + offsetX, to.y + offsetY);
-      ctx.stroke();
+    for (let i = 0; i <= count; i++) {
+      const t = i / count;
+      const x = from.x + dx * t + (Math.random() - 0.5) * 0.7;
+      const y = from.y + dy * t + (Math.random() - 0.5) * 0.7;
+      const size = stampSize * (0.85 + Math.random() * 0.3);
+
+      ctx.globalAlpha = 0.75 + Math.random() * 0.25;
+      ctx.drawImage(stamp, x - size / 2, y - size / 2, size, size);
+
+      // Sparse edge flecks for paper tooth
+      if (Math.random() > 0.7) {
+        const fx = x + (Math.random() - 0.5) * 1.4;
+        const fy = y + (Math.random() - 0.5) * 1.4;
+        const fs = 0.5 + Math.random() * 0.9;
+        ctx.globalAlpha = 0.55 + Math.random() * 0.35;
+        ctx.drawImage(stamp, fx - fs / 2, fy - fs / 2, fs, fs);
+      }
     }
 
-    // Paper tooth: scatter tiny flecks along the stroke
-    const steps = Math.max(1, Math.ceil(length / 1.5));
-    for (let i = 0; i <= steps; i++) {
-      if (Math.random() > 0.55) continue;
-      const t = i / steps;
-      const x = from.x + dx * t + (Math.random() - 0.5) * 2.2;
-      const y = from.y + dy * t + (Math.random() - 0.5) * 2.2;
-      const size = 0.6 + Math.random() * 1.1;
-      ctx.globalAlpha = 0.2 + Math.random() * 0.45;
-      ctx.fillStyle = color;
-      ctx.fillRect(x, y, size, size);
-    }
-
-    // Soft core so the stroke still reads as a continuous line
-    ctx.globalAlpha = 0.35;
-    ctx.lineWidth = baseWidth * 0.55;
+    // Bright broken core so stroke color matches the palette swatch
+    ctx.globalAlpha = 0.55;
+    ctx.lineWidth = 0.7 + Math.random() * 0.5;
     ctx.strokeStyle = color;
+    ctx.setLineDash([1.2, 1.8 + Math.random() * 1.2]);
     ctx.beginPath();
     ctx.moveTo(from.x, from.y);
     ctx.lineTo(to.x, to.y);
     ctx.stroke();
+    ctx.setLineDash([]);
 
     ctx.globalAlpha = 1;
   };

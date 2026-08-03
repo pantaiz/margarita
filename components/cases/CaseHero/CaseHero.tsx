@@ -18,8 +18,16 @@ type CaseHeroProps = {
 export default function CaseHero({ title, meta }: CaseHeroProps) {
   const titleLines = title.split('\n');
 
+  const HEADER_SCROLL_OFFSET = 100;
+
   const scrollToDesign = () => {
-    document.getElementById('design')?.scrollIntoView({ behavior: 'smooth' });
+    const el = document.getElementById('design');
+    if (!el) return;
+
+    const top =
+      window.scrollY + el.getBoundingClientRect().top - HEADER_SCROLL_OFFSET;
+
+    window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
   };
 
   return (

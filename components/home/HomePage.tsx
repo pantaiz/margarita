@@ -36,7 +36,26 @@ export default function HomePage() {
     });
 
   useEffect(() => {
-    scrollToHash();
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+
+    const hash = window.location.hash.slice(1);
+    const sameOriginReferrer = document.referrer.startsWith(window.location.origin);
+
+    // Fresh open / reload should land on hero, not a stale #about
+    window.scrollTo(0, 0);
+
+    if (hash && sameOriginReferrer) {
+      requestAnimationFrame(() => scrollToHash());
+    } else if (hash) {
+      window.history.replaceState(
+        null,
+        '',
+        window.location.pathname + window.location.search,
+      );
+    }
+
     window.addEventListener('hashchange', scrollToHash);
     return () => window.removeEventListener('hashchange', scrollToHash);
   }, []);

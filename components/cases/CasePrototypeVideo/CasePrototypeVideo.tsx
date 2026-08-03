@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { assets } from '@/lib/assets';
+import MorphLoader from '@/components/cases/MorphLoader/MorphLoader';
 import styles from './CasePrototypeVideo.module.css';
 
 type CasePrototypeVideoProps = {
@@ -22,6 +23,24 @@ export default function CasePrototypeVideo({
   const videoRef = useRef<HTMLVideoElement>(null);
   const userPausedRef = useRef(false);
   const [progress, setProgress] = useState(0);
+  const [isBuffering, setIsBuffering] = useState(!isImage);
+  const [showLoader, setShowLoader] = useState(!isImage);
+
+  useEffect(() => {
+    if (isImage) return;
+    setIsBuffering(true);
+    setShowLoader(true);
+  }, [src, isImage]);
+
+  useEffect(() => {
+    if (isImage) return;
+    if (isBuffering) {
+      setShowLoader(true);
+      return;
+    }
+    const timer = window.setTimeout(() => setShowLoader(false), 320);
+    return () => window.clearTimeout(timer);
+  }, [isBuffering, isImage]);
 
   useEffect(() => {
     if (isImage) return;
@@ -49,6 +68,12 @@ export default function CasePrototypeVideo({
       ([entry]) => {
         if (!entry) return;
         if (entry.isIntersecting) {
+          if (video.preload !== 'auto') {
+            video.preload = 'auto';
+          }
+          if (video.readyState < HTMLMediaElement.HAVE_FUTURE_DATA) {
+            setIsBuffering(true);
+          }
           if (reducedMotion) return;
           playNow();
         } else {
@@ -62,6 +87,44 @@ export default function CasePrototypeVideo({
     observer.observe(root);
     return () => {
       observer.disconnect();
+    };
+  }, [src, isImage]);
+
+  useEffect(() => {
+    if (isImage) return;
+    const video = videoRef.current;
+    if (!video) return;
+
+    const markReady = () => {
+      if (video.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) {
+        setIsBuffering(false);
+      }
+    };
+    const markWaiting = () => setIsBuffering(true);
+    const markPlaying = () => {
+      if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+        setIsBuffering(false);
+      }
+    };
+
+    video.addEventListener('loadstart', markWaiting);
+    video.addEventListener('waiting', markWaiting);
+    video.addEventListener('stalled', markWaiting);
+    video.addEventListener('canplay', markReady);
+    video.addEventListener('canplaythrough', markReady);
+    video.addEventListener('playing', markPlaying);
+    video.addEventListener('loadeddata', markReady);
+
+    markReady();
+
+    return () => {
+      video.removeEventListener('loadstart', markWaiting);
+      video.removeEventListener('waiting', markWaiting);
+      video.removeEventListener('stalled', markWaiting);
+      video.removeEventListener('canplay', markReady);
+      video.removeEventListener('canplaythrough', markReady);
+      video.removeEventListener('playing', markPlaying);
+      video.removeEventListener('loadeddata', markReady);
     };
   }, [src, isImage]);
 
@@ -185,20 +248,28 @@ export default function CasePrototypeVideo({
               draggable={false}
             />
           ) : (
-            <video
-              ref={videoRef}
-              className={styles.screen}
-              src={src}
-              poster={poster}
-              width={393}
-              height={852}
-              playsInline
-              muted
-              loop
-              preload="metadata"
-              aria-hidden
-              controls={false}
-            />
+            <>
+              <video
+                ref={videoRef}
+                className={`${styles.screen}${isBuffering ? ` ${styles.screenDim}` : ''}`}
+                src={src}
+                poster={poster}
+                width={393}
+                height={852}
+                playsInline
+                muted
+                loop
+                preload="metadata"
+                aria-hidden
+                controls={false}
+              />
+              <div
+                className={`${styles.loaderLayer}${isBuffering ? ` ${styles.loaderVisible}` : ''}`}
+                aria-hidden={!isBuffering}
+              >
+                {showLoader ? <MorphLoader /> : null}
+              </div>
+            </>
           )}
         </div>
         <img

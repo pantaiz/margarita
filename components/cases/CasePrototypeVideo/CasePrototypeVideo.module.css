@@ -52,6 +52,24 @@
   object-fit: fill;
   object-position: center top;
   pointer-events: none;
+  transition: opacity 280ms ease;
+}
+
+.screenDim {
+  opacity: 0.35;
+}
+
+.loaderLayer {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 280ms ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.loaderVisible {
+  opacity: 1;
 }
 
 .bezel {
