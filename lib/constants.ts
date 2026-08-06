@@ -10,8 +10,8 @@ export const CONTACTS = {
 } as const;
 
 export const NAV_ITEMS: NavItem[] = [
-  { label: 'Обо мне', href: '/#about' },
   { label: 'Проекты', href: '/#projects' },
+  { label: 'Обо мне', href: '/#about' },
   { label: 'Резюме', href: '/assets/resume.pdf', external: true },
 ];
 
