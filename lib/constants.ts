@@ -12,7 +12,7 @@ export const CONTACTS = {
 export const NAV_ITEMS: NavItem[] = [
   { label: 'Проекты', href: '/#projects' },
   { label: 'Обо мне', href: '/#about' },
-  { label: 'Резюме', href: '/assets/resume.pdf', external: true },
+  { label: 'Резюме', href: '/resume', external: true },
 ];
 
 export const CASES: CaseStudy[] = [
@@ -103,7 +103,7 @@ export const SKILL_GROUPS: SkillGroup[] = [
 ];
 
 export const FOOTER_LINKS: ContactLink[] = [
-  { label: 'Резюме', href: '/assets/resume.pdf', icon: '', colorClass: 'blue' },
+  { label: 'Резюме', href: '/resume', icon: '', colorClass: 'blue' },
   {
     label: 'Telegram',
     href: CONTACTS.telegram,

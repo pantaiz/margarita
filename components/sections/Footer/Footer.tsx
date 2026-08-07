@@ -12,7 +12,9 @@ export default function Footer() {
             key={link.label}
             href={link.href}
             className={`${styles.link} interactive ${link.colorClass ? styles[link.colorClass] : ''}`}
-            {...(link.href.startsWith('http') || link.href.endsWith('.pdf')
+            {...(link.href.startsWith('http') ||
+            link.href.endsWith('.pdf') ||
+            link.href === '/resume'
               ? { target: '_blank', rel: 'noopener noreferrer' }
               : {})}
           >
