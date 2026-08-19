@@ -12,6 +12,7 @@ export type CaseStudy = {
   tags: CaseTag[];
   inProgress: boolean;
   coverSrc?: string;
+  clipSrc?: string;
 };
 
 export type CaseTableColumn = {
@@ -52,7 +53,19 @@ export type CaseRichBlock =
   | { type: 'link'; label: string; href: string }
   | { type: 'outline-link'; label: string; href: string }
   | { type: 'links'; items: { label: string; href: string }[] }
-  | { type: 'image'; src: string; alt: string; width?: number; height?: number }
+  | {
+      type: 'image';
+      src: string;
+      alt: string;
+      width?: number;
+      height?: number;
+      variant?: 'cover';
+    }
+  | {
+      type: 'before-after';
+      before: { src: string; alt: string };
+      after: { src: string; alt: string };
+    }
   | {
       type: 'pdf';
       src: string;
@@ -137,7 +150,16 @@ export type CaseStudyMeta = {
 };
 
 export type CaseStudyFull = CaseStudy & {
-  meta: CaseStudyMeta;
+  meta?: CaseStudyMeta;
+  heroCover?: {
+    src: string;
+    alt: string;
+    width?: number;
+    height?: number;
+  };
+  showDesignCta?: boolean;
+  backLabel?: string;
+  containerMax?: number;
   sections: CaseSectionData[];
 };
 

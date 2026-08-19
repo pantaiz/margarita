@@ -1,5 +1,9 @@
 import { assets } from '@/lib/assets';
-import type { CaseStudyFull } from '@/lib/types';
+import { DESIGN_CONCEPTS } from '@/lib/cases/design-concepts';
+import {
+  T_BANK_ONBOARDING_GALLERY,
+  T_BANK_QR_GALLERY,
+} from '@/lib/cases/t-bank-galleries';
 import {
   BENCHMARK_COLUMNS,
   BENCHMARK_ROWS,
@@ -8,6 +12,7 @@ import {
   OTHER_HYPOTHESES_COLUMNS,
   OTHER_HYPOTHESES_ROWS,
 } from '@/lib/cases/t-bank-tables';
+import type { CaseStudyFull } from '@/lib/types';
 
 const A = assets.caseTBank;
 
@@ -22,6 +27,13 @@ export const T_BANK_ROBOT_DELIVERY: CaseStudyFull = {
     { label: 'Mobile app', variant: 'green' },
   ],
   inProgress: false,
+  showDesignCta: true,
+  heroCover: {
+    src: A.heroCover,
+    alt: 'Мокапы экранов доставки карты роботом в приложении Т-Банка',
+    width: 1200,
+    height: 711,
+  },
   meta: {
     role: 'Product designer',
     platform: 'iOS/Android',
@@ -618,62 +630,20 @@ export const T_BANK_ROBOT_DELIVERY: CaseStudyFull = {
         },
         {
           type: 'paragraph',
-          text: 'В процессе работы большое внимание уделила графике. Нужно было создать иллюстрации и иконки, которые бы хорошо вписались в стиль Т-Банка и были красивыми. Ниже показала варианты разных экранов, которые у меня были.',
+          text: 'В процессе работы большое внимание уделила графике. Нужно было создать иллюстрации и иконки, которые бы хорошо вписались в стиль Т-Банка и были красивыми. Ниже показала варианты разных экранов, которые у меня получились.',
         },
         { type: 'heading', text: 'Онбординг' },
         {
           type: 'paragraph',
           text: 'Онбординг должен был заранее объяснить, как проходит доставка и как получить карту, — чтобы человек понял сценарий до первого контакта с роботом и меньше тревожился.',
         },
-        {
-          type: 'screen-gallery',
-          layout: 'phones',
-          groups: [
-            {
-              items: [12, 11, 7].map((n) => ({
-                src: A.onboardingScreens[n - 1],
-                alt: `Вариант онбординга: светлый минималистичный, экран ${n}`,
-              })),
-            },
-            {
-              items: [10, 9, 8, 2, 1].map((n) => ({
-                src: A.onboardingScreens[n - 1],
-                alt: `Вариант онбординга: иллюстрация с облаками, экран ${n}`,
-              })),
-            },
-            {
-              items: [13, 14].map((n) => ({
-                src: A.onboardingScreens[n - 1],
-                alt: `Вариант онбординга: мягкий голубой фон, экран ${n}`,
-              })),
-            },
-            {
-              items: [3, 4, 5, 6].map((n) => ({
-                src: A.onboardingScreens[n - 1],
-                alt: `Вариант онбординга: тёмная тема, экран ${n}`,
-              })),
-            },
-            {
-              items: [15, 16].map((n) => ({
-                src: A.onboardingScreens[n - 1],
-                alt: `Вариант онбординга: жёлтое свечение, экран ${n}`,
-              })),
-            },
-          ],
-        },
+        T_BANK_ONBOARDING_GALLERY,
         { type: 'heading', text: 'Экран QR-кода' },
         {
           type: 'paragraph',
           text: 'На экране QR искала понятную метафору: ракурс робота, телефон и луч скана — чтобы сразу было ясно, куда навести камеру на верхней крышке.',
         },
-        {
-          type: 'screen-gallery',
-          layout: 'phones',
-          items: [1, 6, 4, 3, 2, 5].map((n) => ({
-            src: A.qrScreens[n - 1],
-            alt: `Вариант экрана QR-кода ${n}`,
-          })),
-        },
+        T_BANK_QR_GALLERY,
       ],
     },
     {
@@ -987,5 +957,10 @@ export const T_BANK_ROBOT_DELIVERY: CaseStudyFull = {
 
 export function getCaseStudyFull(slug: string): CaseStudyFull | undefined {
   if (slug === 't-bank-robot-delivery') return T_BANK_ROBOT_DELIVERY;
+  if (slug === 'design-concepts') return DESIGN_CONCEPTS;
   return undefined;
+}
+
+export function getFullCaseSlugs(): string[] {
+  return [T_BANK_ROBOT_DELIVERY.slug, DESIGN_CONCEPTS.slug];
 }

@@ -30,6 +30,20 @@ export const CASES: CaseStudy[] = [
     coverSrc: '/assets/cases/covers/t-bank-cover.png',
   },
   {
+    slug: 'design-concepts',
+    title: 'Разные дизайн-концепты и небольшие проекты',
+    description:
+      'Разные интерфейсные идеи, визуальные эксперименты и отдельные экраны, которые я собрала в одну небольшую коллекцию',
+    tags: [
+      { label: 'WEB', variant: 'pink' },
+      { label: 'Concept', variant: 'blue' },
+      { label: 'Shots', variant: 'yellow' },
+    ],
+    inProgress: false,
+    coverSrc: '/assets/cases/covers/design-concepts-cover.png',
+    clipSrc: assets.paperclipGreenFlip,
+  },
+  {
     slug: 'loooma',
     title: 'Loooma - сервис для управления гардеробом',
     description:
@@ -42,6 +56,7 @@ export const CASES: CaseStudy[] = [
     ],
     inProgress: true,
     coverSrc: '/assets/cases/covers/loooma-cover.png',
+    clipSrc: assets.paperclipPink,
   },
 ];
 

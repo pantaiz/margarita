@@ -27,7 +27,13 @@ export default function CaseCard({ caseStudy }: CaseCardProps) {
       </div>
 
       <div className={styles.clip}>
-        <AppImage src={assets.paperclip} alt="" width={68} height={124} unoptimized />
+        <AppImage
+          src={caseStudy.clipSrc ?? assets.paperclip}
+          alt=""
+          width={68}
+          height={124}
+          unoptimized
+        />
       </div>
 
       <div className={styles.inner}>

@@ -14,9 +14,20 @@ type CasePageProps = {
 };
 
 export default function CasePage({ caseStudy }: CasePageProps) {
+  const pageClass =
+    caseStudy.containerMax === 1080
+      ? `${styles.page} ${styles.page1080}`
+      : styles.page;
+
   return (
-    <article className={styles.page}>
-      <CaseHero title={caseStudy.title} meta={caseStudy.meta} />
+    <article className={pageClass}>
+      <CaseHero
+        title={caseStudy.title}
+        meta={caseStudy.meta}
+        cover={caseStudy.heroCover}
+        showDesignCta={caseStudy.showDesignCta}
+        backLabel={caseStudy.backLabel}
+      />
 
       {caseStudy.sections.map((section, index) => {
         const disclosures = section.disclosures ?? section.accordions;

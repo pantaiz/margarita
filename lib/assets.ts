@@ -4,6 +4,9 @@ export const assets = {
   background: `${A}/background.png`,
   cardBg: `${A}/card-bg.png`,
   paperclip: `${A}/paperclip.png`,
+  paperclipGreen: `${A}/paperclip-green.png`,
+  paperclipGreenFlip: `${A}/paperclip-green-flip.png`,
+  paperclipPink: `${A}/paperclip-pink.png`,
   photo: `${A}/photo.png`,
   arrow: `${A}/arrow.svg`,
   underline: `${A}/underline.svg`,
@@ -102,6 +105,16 @@ export const assets = {
     protoOpenError: `${A}/cases/t-bank/open-error-screen.png`,
     protoReviewPositive: `${A}/cases/t-bank/prototype/review-positive.mp4`,
     protoReviewNegative: `${A}/cases/t-bank/prototype/review-negative.mp4`,
+  },
+  caseConcepts: {
+    productCover: `${A}/cases/concepts/product-cover.png`,
+    listingComparison: `${A}/cases/concepts/listing-comparison.png`,
+    apartmentComparison: `${A}/cases/concepts/apartment-comparison.png`,
+    listingBefore: `${A}/cases/concepts/listing-before.png`,
+    listingAfter: `${A}/cases/concepts/listing-after.png`,
+    apartmentBefore: `${A}/cases/concepts/apartment-before.png`,
+    apartmentAfter: `${A}/cases/concepts/apartment-after.png`,
+    notesCover: `${A}/cases/concepts/notes-cover.png`,
   },
 } as const;
 

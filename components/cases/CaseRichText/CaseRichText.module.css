@@ -6,13 +6,13 @@
   width: 100%;
 }
 
-.richText > :not(.imageWrap):not(.fullBleed):not(.pdfWrap):not(.galleryWrap):not(.tableWrap):not(.tableWide) {
+.richText > :not(.imageWrap):not(.fullBleed):not(.pdfWrap):not(.galleryWrap):not(.tableWrap):not(.tableWide):not(.beforeAfter) {
   max-width: 800px;
   width: 100%;
 }
 
 .paragraph {
-  font-family: var(--font-body);
+  font-family: var(--font-body), sans-serif;
   font-size: 18px;
   line-height: 1.55;
   color: var(--color-blue-brand);
@@ -20,7 +20,7 @@
 }
 
 .heading {
-  font-family: var(--font-display);
+  font-family: var(--font-display), sans-serif;
   font-size: 18px;
   font-weight: 500;
   line-height: 1.35;
@@ -47,7 +47,8 @@
 .heading + .pdfWrap,
 .heading + .galleryWrap,
 .heading + .tableWrap,
-.heading + .tableWide {
+.heading + .tableWide,
+.heading + .beforeAfter {
   margin-top: 0;
 }
 
@@ -60,7 +61,7 @@
 .list,
 .orderedList {
   padding-left: 24px;
-  font-family: var(--font-body);
+  font-family: var(--font-body), sans-serif;
   font-size: 18px;
   line-height: 1.55;
   color: var(--color-blue-brand);
@@ -78,7 +79,7 @@
 }
 
 .link {
-  font-family: var(--font-body);
+  font-family: var(--font-body), sans-serif;
   font-size: 18px;
   line-height: 1.55;
   color: var(--color-blue-brand);
@@ -120,6 +121,19 @@
   border-radius: 16px;
   overflow: hidden;
   background: rgba(255, 255, 255, 0.6);
+}
+
+.imageWrapCover {
+  border-radius: 40px;
+  background: transparent;
+}
+
+.beforeAfter {
+  align-self: stretch;
+  width: 100%;
+  max-width: none;
+  margin-top: 8px;
+  margin-bottom: 8px;
 }
 
 .image {
@@ -164,7 +178,7 @@
   border-left: 4px solid var(--color-yellow-brand);
   border-radius: 0 16px 16px 0;
   background: rgba(255, 218, 51, 0.12);
-  font-family: var(--font-display);
+  font-family: var(--font-display), sans-serif;
   font-size: 18px;
   font-weight: 500;
   line-height: 1.4;
@@ -175,7 +189,7 @@
   padding: 14px 20px;
   border-radius: 16px;
   background: #f2f2f2;
-  font-family: var(--font-body);
+  font-family: var(--font-body), sans-serif;
   font-size: 18px;
   line-height: 1.55;
   color: var(--color-blue-brand);
@@ -205,7 +219,7 @@
 
 .bulletText {
   flex: 1;
-  font-family: var(--font-body);
+  font-family: var(--font-body), sans-serif;
   font-size: 18px;
   line-height: 1.55;
   color: var(--color-blue-brand);
@@ -214,4 +228,10 @@
 
 .emphasis {
   font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .imageWrapCover {
+    border-radius: 24px;
+  }
 }

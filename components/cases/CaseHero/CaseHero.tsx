@@ -10,13 +10,30 @@ import styles from './CaseHero.module.css';
 
 const A = assets.caseTBank;
 
-type CaseHeroProps = {
-  title: string;
-  meta: CaseStudyMeta;
+type CaseHeroCover = {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
 };
 
-export default function CaseHero({ title, meta }: CaseHeroProps) {
+type CaseHeroProps = {
+  title: string;
+  meta?: CaseStudyMeta;
+  cover?: CaseHeroCover;
+  showDesignCta?: boolean;
+  backLabel?: string;
+};
+
+export default function CaseHero({
+  title,
+  meta,
+  cover,
+  showDesignCta = false,
+  backLabel = 'Назад',
+}: CaseHeroProps) {
   const titleLines = title.split('\n');
+  const alignStart = !meta;
 
   const HEADER_SCROLL_OFFSET = 100;
 
@@ -36,10 +53,12 @@ export default function CaseHero({ title, meta }: CaseHeroProps) {
         <div className={styles.introBlock}>
           <Link href="/" className={`${styles.backLink} interactive`}>
             <CaseImage src={A.arrowLeft} alt="" width={24} height={24} />
-            <span>Назад</span>
+            <span>{backLabel}</span>
           </Link>
 
-          <div className={styles.titleBlock}>
+          <div
+            className={`${styles.titleBlock}${alignStart ? ` ${styles.titleBlockStart}` : ''}`}
+          >
             <h1 className={styles.title}>
               {titleLines.map((line, i) => (
                 <span key={line}>
@@ -49,39 +68,45 @@ export default function CaseHero({ title, meta }: CaseHeroProps) {
               ))}
             </h1>
 
-            <div className={styles.meta}>
-              <div className={styles.metaItem}>
-                <span className={styles.metaLabel}>Роль</span>
-                <span className={styles.metaValue}>{meta.role}</span>
+            {meta ? (
+              <div className={styles.meta}>
+                <div className={styles.metaItem}>
+                  <span className={styles.metaLabel}>Роль</span>
+                  <span className={styles.metaValue}>{meta.role}</span>
+                </div>
+                <div className={styles.metaItem}>
+                  <span className={styles.metaLabel}>Платформа</span>
+                  <span className={styles.metaValue}>{meta.platform}</span>
+                </div>
+                <div className={styles.metaItem}>
+                  <span className={styles.metaLabel}>Год</span>
+                  <span className={styles.metaValue}>{meta.year}</span>
+                </div>
               </div>
-              <div className={styles.metaItem}>
-                <span className={styles.metaLabel}>Платформа</span>
-                <span className={styles.metaValue}>{meta.platform}</span>
-              </div>
-              <div className={styles.metaItem}>
-                <span className={styles.metaLabel}>Год</span>
-                <span className={styles.metaValue}>{meta.year}</span>
-              </div>
-            </div>
+            ) : null}
           </div>
         </div>
 
-        <CaseOutlineButton className={styles.cta} onClick={scrollToDesign}>
-          <span>Сразу к дизайну</span>
-          <CaseImage src={A.arrowDown} alt="" width={24} height={24} />
-        </CaseOutlineButton>
+        {showDesignCta ? (
+          <CaseOutlineButton className={styles.cta} onClick={scrollToDesign}>
+            <span>Сразу к дизайну</span>
+            <CaseImage src={A.arrowDown} alt="" width={24} height={24} />
+          </CaseOutlineButton>
+        ) : null}
       </div>
 
-      <div className={styles.coverWrap}>
-        <CaseImage
-          src={A.heroCover}
-          alt="Мокапы экранов доставки карты роботом в приложении Т-Банка"
-          className={styles.coverImage}
-          width={1200}
-          height={711}
-          priority
-        />
-      </div>
+      {cover ? (
+        <div className={styles.coverWrap}>
+          <CaseImage
+            src={cover.src}
+            alt={cover.alt}
+            className={styles.coverImage}
+            width={cover.width ?? 1200}
+            height={cover.height ?? 711}
+            priority
+          />
+        </div>
+      ) : null}
     </header>
   );
 }

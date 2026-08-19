@@ -12,7 +12,7 @@ type CasePrototypeVideoProps = {
   kind?: 'video' | 'image';
 };
 
-export default function CasePrototypeVideo({
+function CasePrototypeVideoInner({
   src,
   alt,
   poster,
@@ -22,25 +22,41 @@ export default function CasePrototypeVideo({
   const rootRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const userPausedRef = useRef(false);
+  const hideLoaderTimerRef = useRef<number | null>(null);
   const [progress, setProgress] = useState(0);
   const [isBuffering, setIsBuffering] = useState(!isImage);
   const [showLoader, setShowLoader] = useState(!isImage);
 
-  useEffect(() => {
+  const updateBuffering = (buffering: boolean) => {
+    setIsBuffering(buffering);
     if (isImage) return;
-    setIsBuffering(true);
-    setShowLoader(true);
-  }, [src, isImage]);
 
-  useEffect(() => {
-    if (isImage) return;
-    if (isBuffering) {
+    if (buffering) {
+      if (hideLoaderTimerRef.current !== null) {
+        window.clearTimeout(hideLoaderTimerRef.current);
+        hideLoaderTimerRef.current = null;
+      }
       setShowLoader(true);
       return;
     }
-    const timer = window.setTimeout(() => setShowLoader(false), 320);
-    return () => window.clearTimeout(timer);
-  }, [isBuffering, isImage]);
+
+    if (hideLoaderTimerRef.current !== null) {
+      window.clearTimeout(hideLoaderTimerRef.current);
+    }
+    hideLoaderTimerRef.current = window.setTimeout(() => {
+      setShowLoader(false);
+      hideLoaderTimerRef.current = null;
+    }, 320);
+  };
+
+  useEffect(
+    () => () => {
+      if (hideLoaderTimerRef.current !== null) {
+        window.clearTimeout(hideLoaderTimerRef.current);
+      }
+    },
+    [],
+  );
 
   useEffect(() => {
     if (isImage) return;
@@ -72,7 +88,7 @@ export default function CasePrototypeVideo({
             video.preload = 'auto';
           }
           if (video.readyState < HTMLMediaElement.HAVE_FUTURE_DATA) {
-            setIsBuffering(true);
+            updateBuffering(true);
           }
           if (reducedMotion) return;
           playNow();
@@ -97,13 +113,13 @@ export default function CasePrototypeVideo({
 
     const markReady = () => {
       if (video.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) {
-        setIsBuffering(false);
+        updateBuffering(false);
       }
     };
-    const markWaiting = () => setIsBuffering(true);
+    const markWaiting = () => updateBuffering(true);
     const markPlaying = () => {
       if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
-        setIsBuffering(false);
+        updateBuffering(false);
       }
     };
 
@@ -302,4 +318,8 @@ export default function CasePrototypeVideo({
       )}
     </div>
   );
+}
+
+export default function CasePrototypeVideo(props: CasePrototypeVideoProps) {
+  return <CasePrototypeVideoInner key={props.src} {...props} />;
 }

@@ -1,5 +1,6 @@
 'use client';
 
+import CaseBeforeAfter from '@/components/cases/CaseBeforeAfter/CaseBeforeAfter';
 import CaseImage from '@/components/cases/CaseImage/CaseImage';
 import CaseOutlineButton from '@/components/cases/CaseOutlineButton/CaseOutlineButton';
 import CasePdfEmbed from '@/components/cases/CasePdfEmbed/CasePdfEmbed';
@@ -149,7 +150,12 @@ export default function CaseRichText({ blocks }: CaseRichTextProps) {
             );
           case 'image':
             return (
-              <div key={index} className={styles.imageWrap}>
+              <div
+                key={index}
+                className={`${styles.imageWrap}${
+                  block.variant === 'cover' ? ` ${styles.imageWrapCover}` : ''
+                }`}
+              >
                 <CaseImage
                   src={block.src}
                   alt={block.alt}
@@ -157,6 +163,12 @@ export default function CaseRichText({ blocks }: CaseRichTextProps) {
                   height={block.height ?? 510}
                   className={styles.image}
                 />
+              </div>
+            );
+          case 'before-after':
+            return (
+              <div key={index} className={styles.beforeAfter}>
+                <CaseBeforeAfter before={block.before} after={block.after} />
               </div>
             );
           case 'pdf':

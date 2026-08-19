@@ -1,7 +1,10 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { CASES, getCaseBySlug } from '@/lib/constants';
-import { getCaseStudyFull } from '@/lib/cases/t-bank-robot-delivery';
+import {
+  getCaseStudyFull,
+  getFullCaseSlugs,
+} from '@/lib/cases/t-bank-robot-delivery';
 import SiteShell from '@/components/layout/SiteShell/SiteShell';
 import CaseStub from '@/components/cases/CaseStub/CaseStub';
 import CasePage from '@/components/cases/CasePage/CasePage';
@@ -11,7 +14,11 @@ type PageProps = {
 };
 
 export async function generateStaticParams() {
-  return CASES.map((c) => ({ slug: c.slug }));
+  const slugs = new Set([
+    ...CASES.map((c) => c.slug),
+    ...getFullCaseSlugs(),
+  ]);
+  return Array.from(slugs).map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -36,13 +43,19 @@ export default async function CaseRoutePage({ params }: PageProps) {
   const caseStudy = getCaseBySlug(slug);
   const fullCase = getCaseStudyFull(slug);
 
-  if (!caseStudy) {
+  if (!caseStudy && !fullCase) {
     notFound();
   }
 
   return (
     <SiteShell mainPaddingTop={82}>
-      {fullCase ? <CasePage caseStudy={fullCase} /> : <CaseStub caseStudy={caseStudy} />}
+      {fullCase ? (
+        <CasePage caseStudy={fullCase} />
+      ) : caseStudy ? (
+        <CaseStub caseStudy={caseStudy} />
+      ) : (
+        notFound()
+      )}
     </SiteShell>
   );
 }

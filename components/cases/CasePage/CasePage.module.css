@@ -10,6 +10,10 @@
   --case-text-max: 800px;
 }
 
+.page1080 {
+  --container-max: 1080px;
+}
+
 .backLink {
   display: inline-flex;
   align-items: center;
