@@ -90,7 +90,7 @@ export default function CaseScreenGallery({
       {isBoards ? (
         gallery
       ) : (
-        <HorizontalScroller>{gallery}</HorizontalScroller>
+        <HorizontalScroller plaque={false}>{gallery}</HorizontalScroller>
       )}
       {active ? (
         <CaseLightbox
