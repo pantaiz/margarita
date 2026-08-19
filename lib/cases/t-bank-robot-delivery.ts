@@ -614,6 +614,7 @@ export const T_BANK_ROBOT_DELIVERY: CaseStudyFull = {
           items: [
             {
               src: A.firstIterationAll,
+              previewSrc: A.firstIterationAllPreview,
               alt: 'Макеты первой итерации до исследований: оформление, трекинг и получение карты',
               lightboxCaptions: [
                 { label: 'Оформление доставки', flex: 4589 },

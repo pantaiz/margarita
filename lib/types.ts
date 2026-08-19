@@ -42,6 +42,7 @@ export type CaseGalleryItem = {
   alt: string;
   caption?: string;
   lightboxCaptions?: CaseLightboxCaption[];
+  previewSrc?: string;
 };
 
 export type CaseRichBlock =

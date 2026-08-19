@@ -52,6 +52,7 @@ export const assets = {
     mockupsBeforeResearch: `${A}/cases/t-bank/robot-delivery-mockups-before-research.pdf`,
     mockupsBeforeResearchPage1: `${A}/cases/t-bank/mockups-before-research/page-1.png`,
     firstIterationAll: `${A}/cases/t-bank/first-iteration/all.png`,
+    firstIterationAllPreview: `${A}/cases/t-bank/first-iteration/all-preview-v6.png`,
     firstIterationDelivery: `${A}/cases/t-bank/first-iteration/delivery.png`,
     firstIterationTracking: `${A}/cases/t-bank/first-iteration/tracking.png`,
     firstIterationPickup: `${A}/cases/t-bank/first-iteration/pickup.png`,

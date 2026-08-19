@@ -5,6 +5,7 @@ import CaseImage from '@/components/cases/CaseImage/CaseImage';
 import CaseLightbox from '@/components/cases/CaseLightbox/CaseLightbox';
 import HorizontalScroller from '@/components/cases/HorizontalScroller/HorizontalScroller';
 import type { CaseGalleryItem } from '@/lib/types';
+import { assets } from '@/lib/assets';
 import styles from './CaseScreenGallery.module.css';
 
 export type { CaseGalleryItem };
@@ -35,40 +36,49 @@ export default function CaseScreenGallery({
       {rows.map((row, rowIndex) => (
         <ul key={rowIndex} className={styles.group}>
           {row.items.map((item) => (
-            <li key={item.src} className={styles.row}>
-              {item.caption ? (
-                <p className={styles.caption}>{item.caption}</p>
-              ) : null}
-              {isBoards ? (
-                <HorizontalScroller>
-                  <button
-                    type="button"
-                    className={styles.item}
-                    onClick={() => setActive(item)}
-                    aria-label={`Увеличить: ${item.alt}`}
-                  >
-                    <CaseImage
-                      className={styles.image}
-                      src={item.src}
-                      alt={item.alt}
-                    />
-                  </button>
-                </HorizontalScroller>
-              ) : (
-                <button
-                  type="button"
-                  className={styles.item}
-                  onClick={() => setActive(item)}
-                  aria-label={`Увеличить: ${item.alt}`}
-                >
-                  <CaseImage
-                    className={styles.image}
-                    src={item.src}
-                    alt={item.alt}
-                  />
-                </button>
-              )}
-            </li>
+            (() => {
+              const isFirstIteration =
+                item.src === assets.caseTBank.firstIterationAll;
+
+              return (
+                <li key={item.src} className={styles.row}>
+                  {item.caption ? (
+                    <p className={styles.caption}>{item.caption}</p>
+                  ) : null}
+                  {isBoards ? (
+                    <HorizontalScroller plaque={!isFirstIteration}>
+                      <button
+                        type="button"
+                        className={`${styles.item} ${
+                          isFirstIteration ? styles.firstIterationFrame : ''
+                        }`}
+                        onClick={() => setActive(item)}
+                        aria-label={`Увеличить: ${item.alt}`}
+                      >
+                        <CaseImage
+                          className={styles.image}
+                          src={item.previewSrc ?? item.src}
+                          alt={item.alt}
+                        />
+                      </button>
+                    </HorizontalScroller>
+                  ) : (
+                    <button
+                      type="button"
+                      className={styles.item}
+                      onClick={() => setActive(item)}
+                      aria-label={`Увеличить: ${item.alt}`}
+                    >
+                      <CaseImage
+                        className={styles.image}
+                        src={item.previewSrc ?? item.src}
+                        alt={item.alt}
+                      />
+                    </button>
+                  )}
+                </li>
+              );
+            })()
           ))}
         </ul>
       ))}
