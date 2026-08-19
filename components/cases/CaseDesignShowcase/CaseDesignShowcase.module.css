@@ -119,12 +119,12 @@
 
 .screens {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 24px;
-  overflow-x: auto;
-  padding-bottom: 8px;
-  scrollbar-width: thin;
-  width: 100%;
+  width: max-content;
+  min-width: 100%;
+  box-sizing: border-box;
+  padding: 4px 0 12px;
 }
 
 .screensMulti .screenWrap {

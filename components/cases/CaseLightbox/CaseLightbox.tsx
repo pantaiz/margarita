@@ -1,8 +1,9 @@
 'use client';
 
-import { useEffect, useSyncExternalStore } from 'react';
+import { useEffect, useRef, useSyncExternalStore } from 'react';
 import { createPortal } from 'react-dom';
 import type { CaseLightboxCaption } from '@/lib/types';
+import { useDragScroll } from '@/hooks/useDragScroll';
 import styles from './CaseLightbox.module.css';
 
 type CaseLightboxProps = {
@@ -20,6 +21,8 @@ export default function CaseLightbox({
   onClose,
   captions,
 }: CaseLightboxProps) {
+  const overlayRef = useRef<HTMLDivElement>(null);
+  useDragScroll(overlayRef, isClient);
   const isClient = useSyncExternalStore(
     emptySubscribe,
     () => true,
@@ -43,6 +46,7 @@ export default function CaseLightbox({
 
   return createPortal(
     <div
+      ref={overlayRef}
       className={styles.overlay}
       role="dialog"
       aria-modal="true"
@@ -53,6 +57,7 @@ export default function CaseLightbox({
         type="button"
         className={styles.close}
         aria-label="Закрыть"
+        data-no-drag
         onClick={(event) => {
           event.stopPropagation();
           onClose();

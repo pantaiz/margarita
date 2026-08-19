@@ -7,6 +7,7 @@
   padding-bottom: 48px;
   --button-fill: transparent;
   --button-fill-hover: transparent;
+  --case-text-max: 800px;
 }
 
 .backLink {

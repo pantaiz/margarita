@@ -3,6 +3,7 @@
 import { useCallback, useState } from 'react';
 import CaseImage from '@/components/cases/CaseImage/CaseImage';
 import CaseLightbox from '@/components/cases/CaseLightbox/CaseLightbox';
+import HorizontalScroller from '@/components/cases/HorizontalScroller/HorizontalScroller';
 import type { CaseGalleryItem } from '@/lib/types';
 import styles from './CaseScreenGallery.module.css';
 
@@ -29,18 +30,31 @@ export default function CaseScreenGallery({
         ? [{ items }]
         : [];
 
-  return (
-    <>
-      <div
-        className={`${styles.list} ${isBoards ? styles.boards : styles.phones}`}
-      >
-        {rows.map((row, rowIndex) => (
-          <ul key={rowIndex} className={styles.group}>
-            {row.items.map((item) => (
-              <li key={item.src} className={styles.row}>
-                {item.caption ? (
-                  <p className={styles.caption}>{item.caption}</p>
-                ) : null}
+  const gallery = (
+    <div className={`${styles.list} ${isBoards ? styles.boards : styles.phones}`}>
+      {rows.map((row, rowIndex) => (
+        <ul key={rowIndex} className={styles.group}>
+          {row.items.map((item) => (
+            <li key={item.src} className={styles.row}>
+              {item.caption ? (
+                <p className={styles.caption}>{item.caption}</p>
+              ) : null}
+              {isBoards ? (
+                <HorizontalScroller>
+                  <button
+                    type="button"
+                    className={styles.item}
+                    onClick={() => setActive(item)}
+                    aria-label={`Увеличить: ${item.alt}`}
+                  >
+                    <CaseImage
+                      className={styles.image}
+                      src={item.src}
+                      alt={item.alt}
+                    />
+                  </button>
+                </HorizontalScroller>
+              ) : (
                 <button
                   type="button"
                   className={styles.item}
@@ -53,11 +67,21 @@ export default function CaseScreenGallery({
                     alt={item.alt}
                   />
                 </button>
-              </li>
-            ))}
-          </ul>
-        ))}
-      </div>
+              )}
+            </li>
+          ))}
+        </ul>
+      ))}
+    </div>
+  );
+
+  return (
+    <>
+      {isBoards ? (
+        gallery
+      ) : (
+        <HorizontalScroller>{gallery}</HorizontalScroller>
+      )}
       {active ? (
         <CaseLightbox
           src={active.src}

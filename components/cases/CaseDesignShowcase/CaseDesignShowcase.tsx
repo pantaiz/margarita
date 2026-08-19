@@ -1,5 +1,6 @@
 import CaseImage from '@/components/cases/CaseImage/CaseImage';
 import CasePrototypeVideo from '@/components/cases/CasePrototypeVideo/CasePrototypeVideo';
+import HorizontalScroller from '@/components/cases/HorizontalScroller/HorizontalScroller';
 import type { CaseDesignBlock } from '@/lib/types';
 import { fixHangingPrepositions } from '@/lib/typography';
 import styles from './CaseDesignShowcase.module.css';
@@ -87,21 +88,23 @@ export default function CaseDesignShowcase({ blocks }: CaseDesignShowcaseProps) 
             )}
 
             {images.length > 0 && (
-              <div
-                className={`${styles.screens} ${
-                  multi || images.length > 1 ? styles.screensMulti : ''
-                }`}
-              >
-                {images.map((image) => (
-                  <div key={image.src} className={styles.screenWrap}>
-                    <CaseImage
-                      src={image.src}
-                      alt={image.alt}
-                      className={styles.screen}
-                    />
-                  </div>
-                ))}
-              </div>
+              <HorizontalScroller>
+                <div
+                  className={`${styles.screens} ${
+                    multi || images.length > 1 ? styles.screensMulti : ''
+                  }`}
+                >
+                  {images.map((image) => (
+                    <div key={image.src} className={styles.screenWrap}>
+                      <CaseImage
+                        src={image.src}
+                        alt={image.alt}
+                        className={styles.screen}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </HorizontalScroller>
             )}
           </article>
         );
