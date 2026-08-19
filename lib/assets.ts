@@ -47,6 +47,22 @@ export const assets = {
     heroCover: `${A}/cases/t-bank/hero-cover.png`,
     usabilityCollage: `${A}/cases/t-bank/usability-collage.png`,
     mockupsBeforeResearch: `${A}/cases/t-bank/robot-delivery-mockups-before-research.pdf`,
+    mockupsBeforeResearchPage1: `${A}/cases/t-bank/mockups-before-research/page-1.png`,
+    firstIterationAll: `${A}/cases/t-bank/first-iteration/all.png`,
+    firstIterationDelivery: `${A}/cases/t-bank/first-iteration/delivery.png`,
+    firstIterationTracking: `${A}/cases/t-bank/first-iteration/tracking.png`,
+    firstIterationPickup: `${A}/cases/t-bank/first-iteration/pickup.png`,
+    onboardingVariants: `${A}/cases/t-bank/onboarding-variants.png`,
+    qrVariants: `${A}/cases/t-bank/qr-variants.png`,
+    onboardingScreens: Array.from(
+      { length: 16 },
+      (_, i) =>
+        `${A}/cases/t-bank/onboarding/${String(i + 1).padStart(2, '0')}.png`,
+    ),
+    qrScreens: Array.from(
+      { length: 6 },
+      (_, i) => `${A}/cases/t-bank/qr/${String(i + 1).padStart(2, '0')}.png`,
+    ),
     phoneBezel: `${A}/cases/t-bank/phone-bezel.png`,
     phoneBezelOverlay: `${A}/cases/t-bank/phone-bezel-overlay.png`,
     phoneFrame: `${A}/cases/t-bank/phone-frame.png`,

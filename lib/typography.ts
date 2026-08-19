@@ -1,12 +1,17 @@
-const HANGING_PREPOSITIONS =
-  'а|в|во|и|к|ко|о|об|обо|от|по|под|при|про|с|со|у|на|за|из|до|для|без|над|между|через|перед|около';
+const HANGING_WORDS =
+  'а|без|бы|в|во|да|для|до|за|и|из|или|к|ко|как|ли|между|на|над|не|ни|но|о|об|обо|около|от|перед|по|под|при|про|с|со|то|у|через|чем|что|это|я';
 
-const HANGING_PREPOSITION_RE = new RegExp(
-  `(^|[\\s(«"„])(${HANGING_PREPOSITIONS})\\s+(?=\\S)`,
+const HANGING_WORD_RE = new RegExp(
+  `(^|[\\s(«"„])(${HANGING_WORDS})[ \\t]+(?=\\S)`,
   'gi',
 );
 
-/** Prevent line breaks after short Russian prepositions/conjunctions. */
+/** Collapse long spaces, glue short Russian words, keep number groups together. */
 export function fixHangingPrepositions(text: string): string {
-  return text.replace(HANGING_PREPOSITION_RE, '$1$2\u00A0');
+  return text
+    .replace(/[\u00A0\u202F\u2007]/g, ' ')
+    .replace(/[ \t]{2,}/g, ' ')
+    .replace(/№\s+/g, '№\u00A0')
+    .replace(HANGING_WORD_RE, '$1$2\u00A0')
+    .replace(/(\d)\s+(?=\d{3}\b)/g, '$1\u00A0');
 }

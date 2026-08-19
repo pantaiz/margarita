@@ -83,9 +83,9 @@
   z-index: 1;
 }
 
-/* Figma 234:698 — track 120×8, fill brand blue */
+/* Midway between original 120px and full phone width */
 .progress {
-  width: 120px;
+  width: 210px;
   height: 8px;
   border-radius: 29px;
   background: #e5e5e5;

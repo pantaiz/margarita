@@ -150,10 +150,10 @@ export const T_BANK_ROBOT_DELIVERY: CaseStudyFull = {
             {
               parts: [
                 {
-                  text: 'На данный момент на рынке отсутствуют примеры доставки банковских карт с помощью роботов. Одним из ключевых ограничений являются требования к идентификации клиента (KYC), закреплённые в ',
+                  text: 'На данный момент на рынке отсутствуют примеры доставки банковских карт с помощью роботов. Одним из ключевых ограничений являются требования к идентификации клиента (KYC), закреплённые ',
                 },
                 {
-                  text: 'Федеральном законе № 115-ФЗ',
+                  text: 'в Федеральном законе № 115-ФЗ',
                   href: 'https://kutyax-r86.gosweb.gosuslugi.ru/netcat_files/userfiles/korruptsiya/NPA/Zakon_ot_07_08_2001_N_115-FZ_O_protivodeystvii_legalizatsii_otmyvaniyu_dohodov_poluchennyh..._Text.pdf',
                 },
                 {
@@ -294,7 +294,7 @@ export const T_BANK_ROBOT_DELIVERY: CaseStudyFull = {
       intro: [
         {
           type: 'paragraph',
-          text: 'Следующим шагом я пошла искать информацию о роботах-доставщиках, каким вообще функционалом они обладают на данный момент и что из себя представляют. Буду рассматривать роботы от Яндекса, так как они уже внедрены на российском рынке. Основные инсайты:',
+          text: 'Следующим шагом я пошла искать информацию о роботах-доставщиках, каким вообще функционалом они обладают на данный момент и что из себя представляют. Буду рассматривать роботов от Яндекса, так как они уже внедрены на российском рынке. Основные инсайты:',
         },
         {
           type: 'bullet-list',
@@ -415,6 +415,7 @@ export const T_BANK_ROBOT_DELIVERY: CaseStudyFull = {
       body: [
         {
           type: 'table',
+          wide: true,
           columns: BENCHMARK_COLUMNS,
           rows: BENCHMARK_ROWS,
           caption:
@@ -544,12 +545,14 @@ export const T_BANK_ROBOT_DELIVERY: CaseStudyFull = {
           type: 'table',
           columns: MUST_HAVE_COLUMNS,
           rows: MUST_HAVE_ROWS,
+          boldFirstSentence: true,
         },
         { type: 'heading', text: 'Остальные гипотезы' },
         {
           type: 'table',
           columns: OTHER_HYPOTHESES_COLUMNS,
           rows: OTHER_HYPOTHESES_ROWS,
+          boldFirstSentence: true,
           caption:
             '*Приоритет раскладывала по отношению Влияние × Простота. Простота: про реализацию на разработке и в целом продукте, брала условные единицы: 1 — высокая сложность, 10 — низкая сложность. Влияние: 1 — низкое влияние, 10 — высокое влияние.',
         },
@@ -561,11 +564,11 @@ export const T_BANK_ROBOT_DELIVERY: CaseStudyFull = {
       intro: [
         {
           type: 'paragraph',
-          text: 'Часть гипотез я отбросила, т.к. не была уверена в их актуальности для доставки банковских продуктов.',
+          text: 'Часть гипотез я отбросила, так как не была уверена в их актуальности для доставки банковских продуктов.',
         },
         {
           type: 'paragraph',
-          text: 'Эту откинула, т.к. она усложняет сценарий получения, при этом непонятна ценность и необходимость такого дополнительного шага.',
+          text: 'Эту откинула, так как она усложняет сценарий получения, при этом непонятна ценность и необходимость такого дополнительного шага.',
         },
         {
           type: 'paragraph',
@@ -573,7 +576,7 @@ export const T_BANK_ROBOT_DELIVERY: CaseStudyFull = {
         },
         {
           type: 'paragraph',
-          text: 'Эту откинула, т.к. она дорогая в реализации и имеет низкую бизнес-ценность для разрабатываемого сценария. Но она может быть оправдана для e-commerce продуктов.',
+          text: 'Эту откинула, так как она дорогая в реализации и имеет низкую бизнес-ценность для разрабатываемого сценария. Но она может быть оправдана для e-commerce продуктов.',
         },
         {
           type: 'paragraph',
@@ -583,7 +586,7 @@ export const T_BANK_ROBOT_DELIVERY: CaseStudyFull = {
     },
     {
       id: 'solution',
-      label: 'Решение. Первая итерация',
+      label: 'Дизайн-решение. Первая итерация',
       intro: [
         {
           type: 'paragraph',
@@ -594,15 +597,82 @@ export const T_BANK_ROBOT_DELIVERY: CaseStudyFull = {
           text: 'Так получился первый вариант, который потом я пошла тестировать.',
         },
         {
-          type: 'rich-paragraph',
-          parts: [
-            { text: 'Первую итерацию можно глянуть ' },
+          type: 'screen-gallery',
+          layout: 'boards',
+          items: [
             {
-              text: 'здесь',
-              href: A.mockupsBeforeResearch,
+              src: A.firstIterationAll,
+              alt: 'Макеты первой итерации до исследований: оформление, трекинг и получение карты',
+              lightboxCaptions: [
+                { label: 'Оформление доставки', flex: 4589 },
+                { label: 'Начало движения робота', flex: 1610 },
+                { label: 'Получение карты', flex: 4688 },
+              ],
             },
-            { text: '.' },
           ],
+        },
+        {
+          type: 'outline-link',
+          label: 'Смотреть в Figma',
+          href: 'https://www.figma.com/design/7ybfjzPnDYGXqzhHKbBSSx/%D0%A2-%D0%91%D0%B0%D0%BD%D0%BA_%D0%B4%D0%BE%D1%81%D1%82%D0%B0%D0%B2%D0%BA%D0%B0-%D1%80%D0%BE%D0%B1%D0%BE%D1%82%D0%BE%D0%BC.-Portfolio?node-id=634-1537&t=nk7LwwD6YzYS9HCz-4',
+        },
+        {
+          type: 'paragraph',
+          text: 'В процессе работы большое внимание уделила графике. Нужно было создать иллюстрации и иконки, которые бы хорошо вписались в стиль Т-Банка и были красивыми. Ниже показала варианты разных экранов, которые у меня были.',
+        },
+        { type: 'heading', text: 'Онбординг' },
+        {
+          type: 'paragraph',
+          text: 'Онбординг должен был заранее объяснить, как проходит доставка и как получить карту, — чтобы человек понял сценарий до первого контакта с роботом и меньше тревожился.',
+        },
+        {
+          type: 'screen-gallery',
+          layout: 'phones',
+          groups: [
+            {
+              items: [12, 11, 7].map((n) => ({
+                src: A.onboardingScreens[n - 1],
+                alt: `Вариант онбординга: светлый минималистичный, экран ${n}`,
+              })),
+            },
+            {
+              items: [10, 9, 8, 2, 1].map((n) => ({
+                src: A.onboardingScreens[n - 1],
+                alt: `Вариант онбординга: иллюстрация с облаками, экран ${n}`,
+              })),
+            },
+            {
+              items: [13, 14].map((n) => ({
+                src: A.onboardingScreens[n - 1],
+                alt: `Вариант онбординга: мягкий голубой фон, экран ${n}`,
+              })),
+            },
+            {
+              items: [3, 4, 5, 6].map((n) => ({
+                src: A.onboardingScreens[n - 1],
+                alt: `Вариант онбординга: тёмная тема, экран ${n}`,
+              })),
+            },
+            {
+              items: [15, 16].map((n) => ({
+                src: A.onboardingScreens[n - 1],
+                alt: `Вариант онбординга: жёлтое свечение, экран ${n}`,
+              })),
+            },
+          ],
+        },
+        { type: 'heading', text: 'Экран QR-кода' },
+        {
+          type: 'paragraph',
+          text: 'На экране QR искала понятную метафору: ракурс робота, телефон и луч скана — чтобы сразу было ясно, куда навести камеру на верхней крышке.',
+        },
+        {
+          type: 'screen-gallery',
+          layout: 'phones',
+          items: [1, 6, 4, 3, 2, 5].map((n) => ({
+            src: A.qrScreens[n - 1],
+            alt: `Вариант экрана QR-кода ${n}`,
+          })),
         },
       ],
     },
@@ -803,6 +873,7 @@ export const T_BANK_ROBOT_DELIVERY: CaseStudyFull = {
             {
               src: A.protoDeliveryChoiceOnboarding,
               alt: 'Прототип: выбор адреса, способа доставки и онбординг',
+              hint: 'videosiki',
             },
           ],
         },

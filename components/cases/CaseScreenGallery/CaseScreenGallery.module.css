@@ -1,0 +1,153 @@
+.list {
+  display: flex;
+  width: 100%;
+  margin: 0;
+  padding: 12px 0 28px;
+  background: transparent;
+}
+
+.phones {
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  gap: 56px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+.boards {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  padding: 4px 0 8px;
+}
+
+.group {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 16px;
+  flex: none;
+  width: max-content;
+  margin: 0;
+  padding: 4px 0 8px;
+  list-style: none;
+  background: transparent;
+}
+
+.boards .group {
+  width: 100%;
+  padding: 0;
+  gap: 0;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: none;
+  min-width: 0;
+}
+
+.phones .row {
+  width: auto;
+}
+
+.boards .row {
+  width: 100%;
+}
+
+.caption {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--color-blue-brand);
+}
+
+.item {
+  display: block;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.phones .item {
+  width: auto;
+  border-radius: 16px;
+  overflow: hidden;
+  background: transparent;
+  box-shadow:
+    0 1px 2px rgba(17, 17, 17, 0.04),
+    0 16px 40px rgba(57, 105, 249, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.phones .item:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 1px 2px rgba(17, 17, 17, 0.04),
+    0 22px 48px rgba(57, 105, 249, 0.16);
+}
+
+.boards .item {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.image {
+  display: block;
+  background: transparent;
+}
+
+.phones .image {
+  width: auto;
+  height: 480px;
+  max-width: none;
+  object-fit: contain;
+}
+
+.boards .image {
+  width: auto;
+  height: 480px;
+  max-width: none;
+  object-fit: contain;
+  object-position: left top;
+  background: transparent;
+}
+
+@media (max-width: 768px) {
+  .phones {
+    gap: 40px;
+  }
+
+  .group {
+    gap: 12px;
+  }
+
+  .phones .image,
+  .boards .image {
+    height: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  .phones {
+    gap: 32px;
+  }
+
+  .phones .image,
+  .boards .image {
+    height: 340px;
+  }
+}

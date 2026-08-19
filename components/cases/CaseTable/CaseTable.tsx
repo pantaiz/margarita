@@ -5,11 +5,27 @@ import styles from './CaseTable.module.css';
 type CaseTableProps = {
   caption?: string;
   markerLegend?: boolean;
+  boldFirstSentence?: boolean;
   columns: CaseTableColumn[];
   rows: CaseTableRow[];
 };
 
-function renderCell(cell: string) {
+function renderLead(cell: string) {
+  const match = cell.match(/^(\d+\.\s+[^.]+\.)(\s+)([\s\S]*)$/);
+  if (!match || !match[1] || !match[3]) {
+    return fixHangingPrepositions(cell);
+  }
+
+  return (
+    <>
+      <strong className={styles.lead}>{fixHangingPrepositions(match[1])}</strong>
+      {match[2]}
+      {fixHangingPrepositions(match[3])}
+    </>
+  );
+}
+
+function renderCell(cell: string, boldFirstSentence: boolean) {
   if (cell === '•') {
     return <span className={styles.markerHit}>•</span>;
   }
@@ -18,19 +34,28 @@ function renderCell(cell: string) {
     return <span className={styles.markerMiss}>—</span>;
   }
 
+  if (boldFirstSentence) {
+    return renderLead(cell);
+  }
+
   return fixHangingPrepositions(cell);
 }
 
 export default function CaseTable({
   caption,
   markerLegend,
+  boldFirstSentence = false,
   columns,
   rows,
 }: CaseTableProps) {
+  const colClass = styles[`cols${columns.length}`];
+
   return (
     <figure className={styles.figure}>
-      <div className={styles.scroll}>
-        <table className={styles.table}>
+      <div className={styles.frame}>
+        <table
+          className={`${styles.table}${colClass ? ` ${colClass}` : ''}`}
+        >
           <thead>
             <tr>
               {columns.map((column, index) => (
@@ -59,7 +84,10 @@ export default function CaseTable({
                     key={cellIndex}
                     className={`${styles.td} ${cellIndex === 0 && row.labelBold ? styles.labelBold : ''} ${cell === '•' || cell === '—' || cell === '-' ? styles.markerCell : ''}`}
                   >
-                    {renderCell(cell)}
+                    {renderCell(
+                      cell,
+                      Boolean(boldFirstSentence && cellIndex === 0),
+                    )}
                   </td>
                 ))}
               </tr>

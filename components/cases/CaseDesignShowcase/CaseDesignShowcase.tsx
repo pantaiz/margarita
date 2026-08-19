@@ -8,6 +8,34 @@ type CaseDesignShowcaseProps = {
   blocks: CaseDesignBlock[];
 };
 
+function VideosikiHint() {
+  return (
+    <div className={styles.videosiki} aria-hidden="true">
+      <span className={styles.videosikiText}>Видосики</span>
+      <svg
+        className={styles.videosikiArrow}
+        viewBox="0 0 86 58"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M78 6C72 28 48 46 10 40"
+          stroke="currentColor"
+          strokeWidth="3.2"
+          strokeLinecap="round"
+        />
+        <path
+          d="M22 28.5L9 40.5L26.5 46"
+          stroke="currentColor"
+          strokeWidth="3.2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </div>
+  );
+}
+
 export default function CaseDesignShowcase({ blocks }: CaseDesignShowcaseProps) {
   return (
     <div className={styles.showcase}>
@@ -33,7 +61,12 @@ export default function CaseDesignShowcase({ blocks }: CaseDesignShowcaseProps) 
                 className={`${styles.videos} ${multi ? styles.videosMulti : ''}`}
               >
                 {videos.map((video) => (
-                  <div key={video.src} className={styles.videoWrap}>
+                  <div
+                    key={video.src}
+                    className={`${styles.videoWrap}${
+                      video.hint === 'videosiki' ? ` ${styles.videoWrapHint}` : ''
+                    }`}
+                  >
                     {video.caption && (
                       <p className={styles.videoCaption}>
                         {fixHangingPrepositions(video.caption)}
@@ -47,6 +80,7 @@ export default function CaseDesignShowcase({ blocks }: CaseDesignShowcaseProps) 
                         kind={video.kind}
                       />
                     </div>
+                    {video.hint === 'videosiki' ? <VideosikiHint /> : null}
                   </div>
                 ))}
               </div>

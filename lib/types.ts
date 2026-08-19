@@ -31,6 +31,18 @@ export type CaseRichTextPart =
 
 export type CaseBulletItem = string | { parts: CaseRichTextPart[] };
 
+export type CaseLightboxCaption = {
+  label: string;
+  flex: number;
+};
+
+export type CaseGalleryItem = {
+  src: string;
+  alt: string;
+  caption?: string;
+  lightboxCaptions?: CaseLightboxCaption[];
+};
+
 export type CaseRichBlock =
   | { type: 'paragraph'; text: string }
   | { type: 'rich-paragraph'; parts: CaseRichTextPart[] }
@@ -41,12 +53,26 @@ export type CaseRichBlock =
   | { type: 'outline-link'; label: string; href: string }
   | { type: 'links'; items: { label: string; href: string }[] }
   | { type: 'image'; src: string; alt: string; width?: number; height?: number }
+  | {
+      type: 'pdf';
+      src: string;
+      pages: string[];
+      title: string;
+    }
+  | {
+      type: 'screen-gallery';
+      items?: CaseGalleryItem[];
+      groups?: { items: CaseGalleryItem[] }[];
+      layout?: 'phones' | 'boards';
+    }
   | { type: 'callout'; text: string }
   | { type: 'highlight'; text: string }
   | {
       type: 'table';
       caption?: string;
       markerLegend?: boolean;
+      boldFirstSentence?: boolean;
+      wide?: boolean;
       columns: CaseTableColumn[];
       rows: CaseTableRow[];
     }
@@ -74,6 +100,8 @@ export type CaseDesignVideo = {
   caption?: string;
   /** Static frame inside phone mockup instead of video */
   kind?: 'video' | 'image';
+  /** Handwritten «Видосики» hint to the right of the phone */
+  hint?: 'videosiki';
 };
 
 export type CaseDesignBlock = {

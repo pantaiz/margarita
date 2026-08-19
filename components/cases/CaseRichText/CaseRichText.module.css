@@ -6,7 +6,7 @@
   width: 100%;
 }
 
-.richText > :not(.imageWrap):not(.fullBleed) {
+.richText > :not(.imageWrap):not(.fullBleed):not(.pdfWrap):not(.galleryWrap):not(.tableWrap):not(.tableWide) {
   max-width: 800px;
   width: 100%;
 }
@@ -42,7 +42,12 @@
 .heading + .outlineLinkWrap,
 .heading + .links,
 .heading + .highlight,
-.heading + .callout {
+.heading + .callout,
+.heading + .imageWrap,
+.heading + .pdfWrap,
+.heading + .galleryWrap,
+.heading + .tableWrap,
+.heading + .tableWide {
   margin-top: 0;
 }
 
@@ -87,6 +92,14 @@
   margin-top: 8px;
 }
 
+.outlineLinkWrap + .paragraph {
+  margin-top: 52px;
+}
+
+.outlineLinkWrap + .paragraph + .heading {
+  margin-top: 0;
+}
+
 .outlineLink {
   width: auto;
   text-decoration: none;
@@ -119,6 +132,30 @@
   align-self: stretch;
   width: 100%;
   max-width: none;
+}
+
+.pdfWrap {
+  align-self: stretch;
+  width: 100%;
+  max-width: none;
+}
+
+.galleryWrap {
+  align-self: stretch;
+  width: 100%;
+  max-width: none;
+  background: transparent;
+}
+
+.tableWrap {
+  max-width: 800px;
+  width: 100%;
+}
+
+.tableWide {
+  align-self: stretch;
+  width: 100%;
+  max-width: 1200px;
 }
 
 .callout {

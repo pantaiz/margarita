@@ -41,7 +41,7 @@ export default async function CaseRoutePage({ params }: PageProps) {
   }
 
   return (
-    <SiteShell contentWidth={1080} mainPaddingTop={82}>
+    <SiteShell mainPaddingTop={82}>
       {fullCase ? <CasePage caseStudy={fullCase} /> : <CaseStub caseStudy={caseStudy} />}
     </SiteShell>
   );

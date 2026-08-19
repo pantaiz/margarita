@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { fixHangingPrepositions } from '@/lib/typography';
 import styles from './CaseSection.module.css';
 
 type CaseSectionProps = {
@@ -21,7 +22,7 @@ export default function CaseSection({ label, index, id, children }: CaseSectionP
         <span className={styles.index} aria-hidden="true">
           {indexLabel}
         </span>
-        <h2 className={styles.label}>{label}</h2>
+        <h2 className={styles.label}>{fixHangingPrepositions(label)}</h2>
       </div>
       <div className={styles.body}>{children}</div>
     </section>

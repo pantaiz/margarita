@@ -2,9 +2,11 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  max-width: 1080px;
+  max-width: var(--container-max);
   margin: 0 auto;
   padding-bottom: 48px;
+  --button-fill: transparent;
+  --button-fill-hover: transparent;
 }
 
 .backLink {

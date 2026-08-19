@@ -2,6 +2,8 @@
 
 import CaseImage from '@/components/cases/CaseImage/CaseImage';
 import CaseOutlineButton from '@/components/cases/CaseOutlineButton/CaseOutlineButton';
+import CasePdfEmbed from '@/components/cases/CasePdfEmbed/CasePdfEmbed';
+import CaseScreenGallery from '@/components/cases/CaseScreenGallery/CaseScreenGallery';
 import CaseTable from '@/components/cases/CaseTable/CaseTable';
 import type { CaseBulletItem, CaseRichBlock, CaseRichTextPart } from '@/lib/types';
 import { assets } from '@/lib/assets';
@@ -157,6 +159,26 @@ export default function CaseRichText({ blocks }: CaseRichTextProps) {
                 />
               </div>
             );
+          case 'pdf':
+            return (
+              <div key={index} className={styles.pdfWrap}>
+                <CasePdfEmbed
+                  src={block.src}
+                  pages={block.pages}
+                  title={block.title}
+                />
+              </div>
+            );
+          case 'screen-gallery':
+            return (
+              <div key={index} className={styles.galleryWrap}>
+                <CaseScreenGallery
+                  items={block.items}
+                  groups={block.groups}
+                  layout={block.layout}
+                />
+              </div>
+            );
           case 'callout':
             return (
               <blockquote key={index} className={styles.callout}>
@@ -171,12 +193,16 @@ export default function CaseRichText({ blocks }: CaseRichTextProps) {
             );
           case 'table':
             return (
-              <div key={index} className={styles.fullBleed}>
+              <div
+                key={index}
+                className={block.wide ? styles.tableWide : styles.tableWrap}
+              >
                 <CaseTable
                   caption={
                     block.caption ? formatText(block.caption) : undefined
                   }
                   markerLegend={block.markerLegend}
+                  boldFirstSentence={block.boldFirstSentence}
                   columns={block.columns}
                   rows={block.rows}
                 />

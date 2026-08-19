@@ -77,8 +77,8 @@ export default function CaseHero({ title, meta }: CaseHeroProps) {
           src={A.heroCover}
           alt="Мокапы экранов доставки карты роботом в приложении Т-Банка"
           className={styles.coverImage}
-          width={1080}
-          height={640}
+          width={1200}
+          height={711}
           priority
         />
       </div>
