@@ -44,11 +44,14 @@
 
 .toggle {
   align-self: flex-start;
-  background: #fafafa;
+  border: none;
+  background: #ffffff;
+  box-shadow: none;
 }
 
 .toggle:hover {
   background: #ffffff;
+  box-shadow: none;
 }
 
 .content {
