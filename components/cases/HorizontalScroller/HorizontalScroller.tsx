@@ -74,6 +74,42 @@ export default function HorizontalScroller({
 
   return (
     <div className={`${styles.frame}${className ? ` ${className}` : ''}`}>
+      {showControls ? (
+        <div className={styles.controls}>
+          <button
+            type="button"
+            className={styles.nav}
+            aria-label="Прокрутить назад"
+            data-no-drag
+            disabled={!canPrev}
+            onClick={() => scrollByDir(-1)}
+          >
+            <CaseImage
+              className={styles.icon}
+              src={assets.caseTBank.arrowLeft}
+              alt=""
+              width={24}
+              height={24}
+            />
+          </button>
+          <button
+            type="button"
+            className={styles.nav}
+            aria-label="Прокрутить вперёд"
+            data-no-drag
+            disabled={!canNext}
+            onClick={() => scrollByDir(1)}
+          >
+            <CaseImage
+              className={`${styles.icon} ${styles.iconRight}`}
+              src={assets.caseTBank.arrowLeft}
+              alt=""
+              width={24}
+              height={24}
+            />
+          </button>
+        </div>
+      ) : null}
       <div
         ref={scrollerRef}
         className={`${styles.scroller}${
@@ -83,41 +119,6 @@ export default function HorizontalScroller({
       >
         {children}
       </div>
-      {showControls && canPrev ? (
-        <button
-          type="button"
-          className={`${styles.nav} ${styles.navLeft}`}
-          aria-label="Прокрутить назад"
-          data-no-drag
-          onClick={() => scrollByDir(-1)}
-        >
-          <CaseImage
-            className={styles.icon}
-            src={assets.caseTBank.arrowLeft}
-            alt=""
-            width={24}
-            height={24}
-          />
-        </button>
-      ) : null}
-      {showControls ? (
-        <button
-          type="button"
-          className={`${styles.nav} ${styles.navRight}`}
-          aria-label="Прокрутить вперёд"
-          data-no-drag
-          disabled={!canNext}
-          onClick={() => scrollByDir(1)}
-        >
-          <CaseImage
-            className={`${styles.icon} ${styles.iconRight}`}
-            src={assets.caseTBank.arrowLeft}
-            alt=""
-            width={24}
-            height={24}
-          />
-        </button>
-      ) : null}
     </div>
   );
 }
