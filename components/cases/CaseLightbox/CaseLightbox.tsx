@@ -22,12 +22,12 @@ export default function CaseLightbox({
   captions,
 }: CaseLightboxProps) {
   const overlayRef = useRef<HTMLDivElement>(null);
-  useDragScroll(overlayRef, isClient);
   const isClient = useSyncExternalStore(
     emptySubscribe,
     () => true,
     () => false,
   );
+  useDragScroll(overlayRef, isClient);
 
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
