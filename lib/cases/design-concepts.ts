@@ -39,7 +39,7 @@ export const DESIGN_CONCEPTS: CaseStudyFull = {
           src: A.productCover,
           alt: 'Два макета страницы товара косметики Истоки на фоне природы',
           width: 1080,
-          height: 993,
+          height: 1033,
         },
       ],
     },
